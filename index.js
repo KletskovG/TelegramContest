@@ -8,23 +8,38 @@
 
 //Find the width of scree
 
-const arr = [100,200,20,30,80,60,50,90,150]
 
-//TODO: delete it!
-function log(...text){
-    console.log(text)
+
+function randomInRange(start, end) {
+  return Math.floor(Math.random() * (end - start + 1) + start);
 }
+
+const arr = []
+
+const arr2 = []
+
+for(let i = 0; i < 20; i++){
+ arr.push(randomInRange(40,200))
+}
+
+for(let i = 0; i < 20; i++){
+    arr2.push(randomInRange(40,150))
+}
+
+// //TODO: delete it!
+// function log(...text) {
+//     console.log(text)
+// }
 
 const numberOfPoints = arr.length
 
 const intervalBetweenPoints = parseInt(innerWidth / numberOfPoints)
 
 
-const arrMax = Math.max(...arr)
+const arrMax = Math.max(...arr,...arr2)
 
-function addToPath(curr, prev, xPos){
-    log('Try to add path')
-    
+function addToPath(curr, prev, xPos) {
+
     let posOnTheScreen
     const SVG = document.querySelector(`svg`)
     let rectSVG = SVG.getBoundingClientRect()
@@ -32,46 +47,63 @@ function addToPath(curr, prev, xPos){
     let prevPercent = parseInt(prev * 100 / arrMax)
     let prevPos = parseInt(rectSVG.height * prevPercent / 100)
 
-    
-    console.log(curr, max)
-    // IF the element max on the screen
-    if(curr === arrMax){
-        posOnTheScreen = parseInt(rectSVG.height)
 
-        // ADd path here
+    // IF the element max on the screen
+    if (curr === arrMax) {
+        posOnTheScreen = 0
+
+        // Add path
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+        path.setAttributeNS(null, 'd', `M${xPos - intervalBetweenPoints}, ${prevPos} L${xPos}, ${posOnTheScreen}`)
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+        circle.setAttributeNS(null, 'cx', `${xPos - intervalBetweenPoints}`)
+        circle.setAttributeNS(null, 'cy', `${prevPos}`)
+        circle.setAttributeNS(null, 'r', "2")
+
+        
+        SVG.appendChild(path)
+        SVG.appendChild(circle)
     }
 
-    else{
+    else {
+
+        // Position of the current path
+        let percent = parseInt((curr * 100) / arrMax); 
+        posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
+
+        if(prev === arrMax) prevPos = 0
+
+        // Add path
+        const path = document.createElementNS('http://www.w3.org/2000/svg','path')
+        path.setAttributeNS(null,'d', `M${xPos - intervalBetweenPoints}, ${prevPos} L${xPos}, ${posOnTheScreen}`)
         
-          let percent = parseInt((curr * 100) / arrMax); // Percent of SVG height
-          posOnTheScreen = parseInt((rectSVG.height * percent) / 100); // Find the position on the screen PIXELS
+        const circle = document.createElementNS("http://www.w3.org/2000/svg","circle")
+        circle.setAttributeNS(null,'cx', `${xPos - intervalBetweenPoints}`)
+        circle.setAttributeNS(null,'cy', `${prevPos}`)
+        circle.setAttributeNS(null,'r', "2")
 
-          // ADd path here
-          const path = document.createElement('path')
-          path.setAttribute('d', `M${xPos - intervalBetweenPoints}, ${prevPos} L${xPos}, ${posOnTheScreen}`)
-          const circle = document.createElement('circle')
-          circle.setAttribute('cx', `${xPos - intervalBetweenPoints}`)
-          circle.setAttribute('cy', `${prevPos}`)
-          circle.setAttribute('r', "2")
-
-          SVG.appendChild(path)
-          SVG.appendChild(circle)
-        }
-
-    // log(curr,prev, xPos)
+        SVG.appendChild(path)
+        SVG.appendChild(circle)
+    }
 }
 
-window.onload = ()=> {
+window.onload = () => {
     const SVG = document.querySelector('svg')
     SVG.style.width = innerWidth
 
-    // ADd path here
     // Change it for number of elements on the screen
     let xPos = 0
-    for(let i = 1; i < arr.length; i++){
+    for (let i = 1; i < arr.length; i++) {
         addToPath(arr[i], arr[i - 1], xPos)
 
         xPos += intervalBetweenPoints
+    }
+
+    let xPos2 = 0
+    for (let i = 1; i < arr2.length; i++) {
+      addToPath(arr2[i], arr2[i - 1], xPos2);
+
+      xPos2 += intervalBetweenPoints;
     }
 }
 
