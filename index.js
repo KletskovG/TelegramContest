@@ -23,6 +23,8 @@ const intervalBetweenPoints = parseInt(innerWidth / numberOfPoints)
 const arrMax = Math.max(...arr)
 
 function addToPath(curr, prev, xPos){
+    log('Try to add path')
+    
     let posOnTheScreen
     const SVG = document.querySelector(`svg`)
     let rectSVG = SVG.getBoundingClientRect()
@@ -30,6 +32,8 @@ function addToPath(curr, prev, xPos){
     let prevPercent = parseInt(prev * 100 / arrMax)
     let prevPos = parseInt(rectSVG.height * prevPercent / 100)
 
+    
+    console.log(curr, max)
     // IF the element max on the screen
     if(curr === arrMax){
         posOnTheScreen = parseInt(rectSVG.height)
@@ -38,15 +42,23 @@ function addToPath(curr, prev, xPos){
     }
 
     else{
+        
           let percent = parseInt((curr * 100) / arrMax); // Percent of SVG height
           posOnTheScreen = parseInt((rectSVG.height * percent) / 100); // Find the position on the screen PIXELS
 
           // ADd path here
           const path = document.createElement('path')
-          path.setAttribute('d', `M${xPos - intervalBetweenPoints} `)
+          path.setAttribute('d', `M${xPos - intervalBetweenPoints}, ${prevPos} L${xPos}, ${posOnTheScreen}`)
+          const circle = document.createElement('circle')
+          circle.setAttribute('cx', `${xPos - intervalBetweenPoints}`)
+          circle.setAttribute('cy', `${prevPos}`)
+          circle.setAttribute('r', "2")
+
+          SVG.appendChild(path)
+          SVG.appendChild(circle)
         }
 
-    log(curr,prev, xPos)
+    // log(curr,prev, xPos)
 }
 
 window.onload = ()=> {
