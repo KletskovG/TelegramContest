@@ -1,47 +1,33 @@
-// Load data for 4 charts and manage it 
+let DATA
+async function getData() {
+    // fetch('chart_data.json')
+    //     .then(res => res.json())
+    //     .then(res => DATA = res)
+    //     .catch(err => console.log(err))
+}
 
 
-// Load data 
-
-
-// Test
-
-//Find the width of scree
-
-
-
+//TODO: delete it! 
 function randomInRange(start, end) {
   return Math.floor(Math.random() * (end - start + 1) + start);
 }
 
 const arr = []
 
-const arr2 = []
-
 for(let i = 0; i < 20; i++){
  arr.push(randomInRange(40,200))
 }
-
-for(let i = 0; i < 20; i++){
-    arr2.push(randomInRange(40,150))
-}
-
-// //TODO: delete it!
-// function log(...text) {
-//     console.log(text)
-// }
 
 const numberOfPoints = arr.length
 
 const intervalBetweenPoints = parseInt(innerWidth / numberOfPoints)
 
+const arrMax = Math.max(...arr)
 
-const arrMax = Math.max(...arr,...arr2)
-
-function addToPath(curr, prev, xPos) {
+function addToPath(curr, prev, xPos, selector) {
 
     let posOnTheScreen
-    const SVG = document.querySelector(`svg`)
+    const SVG = document.querySelector(`${selector}`)
     let rectSVG = SVG.getBoundingClientRect()
 
     let prevPercent = parseInt(prev * 100 / arrMax)
@@ -54,7 +40,11 @@ function addToPath(curr, prev, xPos) {
 
         // Add path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+        
         path.setAttributeNS(null, 'd', `M${xPos - intervalBetweenPoints}, ${prevPos} L${xPos}, ${posOnTheScreen}`)
+        path.setAttributeNS(null,'filter', 'url(#blueMe)')
+        
+        
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
         circle.setAttributeNS(null, 'cx', `${xPos - intervalBetweenPoints}`)
         circle.setAttributeNS(null, 'cy', `${prevPos}`)
@@ -87,24 +77,38 @@ function addToPath(curr, prev, xPos) {
     }
 }
 
-window.onload = () => {
-    const SVG = document.querySelector('svg')
-    SVG.style.width = innerWidth
+function buildChart(){
 
-    // Change it for number of elements on the screen
-    let xPos = 0
-    for (let i = 1; i < arr.length; i++) {
-        addToPath(arr[i], arr[i - 1], xPos)
+}
 
-        xPos += intervalBetweenPoints
-    }
+window.onload = async () => {
+    // DATA.forEach(object => {
+    //     object.columns.forEach(xpos => console.log(xpos))
+    // })
 
-    let xPos2 = 0
-    for (let i = 1; i < arr2.length; i++) {
-      addToPath(arr2[i], arr2[i - 1], xPos2);
+    await fetch('chart_data.json')
+        .then(res => res.json())
+        .then(res => DATA = res)
+        .catch(err => console.log(err))
 
-      xPos2 += intervalBetweenPoints;
-    }
+    DATA.forEach(object => {
+        object.columns.forEach(xpos => console.log(xpos))
+    })
+
+
+    // const SVG = document.querySelector('svg')
+    // SVG.style.width = innerWidth
+    // let selector = '.bigChart'
+    //
+    //
+    // // Change it for number of elements on the screen
+    // //TODO: refactor ; make function to build charts in for loop
+    // let xPos = 0
+    // for (let i = 1; i < arr.length; i++) {
+    //     addToPath(arr[i], arr[i - 1], xPos, selector)
+    //     addToPath(arr[i], arr[i-1],xPos,'.smallChart')
+    //     xPos += intervalBetweenPoints
+    // }
 }
 
 
