@@ -13,16 +13,16 @@
         Followers
     </h2>
 
-    <svg width="1440" height="400" class="bigChart">
-        <!-- <filter id="blurMe">
-            <feGaussianBlur stdDeviation="5" in="SourceGraphic"/>
-        </filter>
+    <svg width="1440" height="400" class="bigSVG">
 
-        <circle></circle> -->
     </svg>
 
-    <svg width="1440" height="80" class="smallChart">
+    <svg width="1440" height="120" class="smallSVG">
+        <g class="selector" fill="black" stroke="black" style="">
+            <rect x="10" y="0" width="10" height="120" class="selectCorner rightCorner"/>
+            <rect x="170" y="0" width="10" height="120" class="selectCorner rightLeft"/>
 
+        </g>
 
     </svg>
 
@@ -39,8 +39,9 @@
         </label>    
         
     </form>
-    
 
-<script src="index.js"></script>
+
+    <script src="graph.js" defer></script>
+    <script src="index.js" defer></script>
 </body>
 </html>
