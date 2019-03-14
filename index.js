@@ -1,4 +1,4 @@
-//
+// Comment
 
 
 let DATA // DATA form JSON file
@@ -23,7 +23,7 @@ window.onload = async () => {
     const selector = new Selector()
 
     selector.dragSelector()
-    
+
 
 
     // const selectorCorners = document.querySelectorAll('.selectCorner')
