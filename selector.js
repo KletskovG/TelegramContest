@@ -146,8 +146,9 @@ class Selector{
     }
 
     createSelector(){
-        const foreignObject = document.createElementNS('foreignObject')
 
+
+        document.querySelector('.smallSVG').prepend(foreignObject)
     }
 }
 

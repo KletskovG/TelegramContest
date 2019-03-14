@@ -1,17 +1,13 @@
-// Hello dev branch
+//
+
+
 let DATA // DATA form JSON file
 
-function setTheCoreners(){
-    const corners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < corners.length; i++){
-        corners[i].addEventListener('', ()=>{
 
-        })
-    }
-}
 
 window.onload = async () => {
 
+    // Read JSON
     await fetch('chart_data.json')
         .then(res => res.json())
         .then(res => DATA = res)
@@ -20,58 +16,32 @@ window.onload = async () => {
     // TODO: Change DATA[0] to index thaty client is choosed
     let obj = DATA[0]
     const firstGraph = new Graph(obj)
+    // Build Charts
     firstGraph.addToPath('smallSVG')
     firstGraph.addToPath('bigSVG')
 
-    const selectorCorners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < selectorCorners.length; i++){
-        // makeDraggable(selectorCorners[i])
+    const selector = new Selector()
 
-        // moveSection(selectorCorners[i],'350','0')
-    }
+    selector.dragSelector()
+    
+
+
+    // const selectorCorners = document.querySelectorAll('.selectCorner')
+    // const selector = document.querySelector('.selector')
+    // for(let i = 0; i < selectorCorners.length; i++){
+    //     makeDraggable(selectorCorners[i])
+    // }
+    //
+    // const smallSVG = document.querySelector('.smallSVG')
+    // smallSVG.children[0].remove()
+    // smallSVG.appendChild(selector)
+    //
+    //
+    // const main = document.querySelector('.selectMain')
+    // makeDraggable(main)
+
+    // dragSelector()
+
+
 }
-
-
-// TODO: stop here trying to make selector corners move right
-function makeDraggable(elem){
-    let svg = elem;
-    svg.addEventListener('mousedown', startDrag);
-    svg.addEventListener('mousemove', drag);
-    svg.addEventListener('mouseup', endDrag);
-    svg.addEventListener('mouseleave', endDrag);
-
-    let selectedElement = false
-    let offset
-
-    let prevX
-
-    function startDrag(elem) {
-        if(elem.classList.contains('selectCorner')){
-            selectedElement = elem
-        }
-    }
-
-    function getMousePosition(elem) {
-
-    }
-
-    function drag(elem) {
-        let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-        elem.setAttribute('transform', transformAttr);
-    }
-
-    function endDrag(elem) {
-
-    }
-}
-
-// function moveSection(elem, xOffset, yOffset) {
-//
-//     if (elem.classList.contains('selectCorner')) {
-//         let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-//         elem.setAttribute('transform', transformAttr);
-//     }
-// }
-
-
 

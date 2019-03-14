@@ -1,4 +1,4 @@
-class Graph{
+class Graph {
     constructor(obj){
         this.obj = obj
     }
@@ -34,9 +34,10 @@ class Graph{
     }
 
     // Build Chrats
-    // TODO: REfactor % add <g> and append paths to this tag
     // TODO: also set the stroke and so on to this tag
     addToPath(selector){
+
+
         const SVG = document.querySelector(`.${selector}`)
         const rectSVG = SVG.getBoundingClientRect()
         const intervalBetweenPoints = rectSVG.width / this.obj.columns[0].length
@@ -72,8 +73,8 @@ class Graph{
                         circle.setAttributeNS(null, 'r', "1")
                         this.colorElement(circle, this.obj.columns[index][0])
 
-                        SVG.appendChild(path)
-                        SVG.appendChild(circle)
+                        SVG.prepend(path)
+                        SVG.prepend(circle)
                     }
 
                     else{
@@ -96,8 +97,8 @@ class Graph{
                         this.colorElement(circle, this.obj.columns[index][0])
 
 
-                        SVG.appendChild(path)
-                        SVG.appendChild(circle)
+                        SVG.prepend(path)
+                        SVG.prepend(circle)
                     }
 
                     xPos += intervalBetweenPoints
@@ -106,5 +107,10 @@ class Graph{
         })
 
 
+    }
+
+    clearPath(selector){
+        let _selector = document.querySelector(`.${selector}`)
+        _selector.innerHTML = ''
     }
 }
