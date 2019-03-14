@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Charts</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h2>
+        Followers
+    </h2>
+
+    <svg width="1440" height="400" class="bigSVG">
+
+    </svg>
+
+    <svg width="1440" height="120" class="smallSVG">
+        <foreignObject id="selector"
+                       
+                       height="120"
+                       class="selector"
+                       fill="black"
+                       stroke="black">
+
+            <svg style="position: relative;" class="svgg">
+                <rect x="40" y="0" width="130" height="120" style="fill:green"
+                      class="selectMain"></rect>
+
+
+
+                <rect x="170" y="0" width="20" height="120" class="selectCorner rightCorner"></rect>
+
+
+
+                <rect x="10" y="0" width="20" height="120"
+                      class="selectCorner leftCorner"></rect>
+
+
+            </svg>
+
+            <style>
+
+                .selectMain{
+                    cursor: move;
+                }
+            </style>
+
+        </foreignObject>
+    </svg>
+
+    <script src="graph.js" defer></script>
+    <script src="selector.js" defer></script>
+    <script src="index.js" defer></script>
+</body>
+</html>
