@@ -147,14 +147,9 @@ class Selector{
 
     createSelector(){
         const foreignObject = document.createElementNS('foreignObject')
-        
+
     }
 }
-
-function dragSelector(){
-
-}
-
 
 
 
