@@ -36,7 +36,7 @@ class Graph {
     // Build Chrats
     // TODO: also set the stroke and so on to this tag
     addToPath(selector){
-
+        this.setBigSVGWidth(this.obj.columns[0].length)
 
         const SVG = document.querySelector(`.${selector}`)
         const rectSVG = SVG.getBoundingClientRect()
@@ -47,10 +47,10 @@ class Graph {
         // TODO: Refactor this code, must create <foreignObject> and add paths to this
         //  element
         // const _element = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject')
-        // _element.style.cssText = `
-        //         width:100%;
-        //         height: 100%;
-        //     `
+        //         // _element.style.cssText = `
+        //         //         width:100%;
+        //         //         height: 100%;
+        //         //     `
         // _element.setAttributeNS(null, 'width', '1440')
         // _element.setAttributeNS(null, 'height', '440')
         // _element.innerHTML = `
@@ -128,8 +128,12 @@ class Graph {
 
     }
 
-    clearPath(selector){
-        let _selector = document.querySelector(`.${selector}`)
-        _selector.innerHTML = ''
+    // Set the .bigWVG width bigger than screen width
+    // 1 element in this.obj.columns == 20px
+    setBigSVGWidth(chartLength){
+        const bigSVG = document.querySelector('.bigSVG')
+
+        bigSVG.style.width = `${chartLength * 20}`
     }
+
 }
