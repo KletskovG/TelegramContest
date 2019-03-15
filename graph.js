@@ -44,23 +44,6 @@ class Graph {
 
         const max = this.defineMax()
 
-        // TODO: Refactor this code, must create <foreignObject> and add paths to this
-        //  element
-        // const _element = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject')
-        //         // _element.style.cssText = `
-        //         //         width:100%;
-        //         //         height: 100%;
-        //         //     `
-        // _element.setAttributeNS(null, 'width', '1440')
-        // _element.setAttributeNS(null, 'height', '440')
-        // _element.innerHTML = `
-        //         <svg id="#${selector}" style="width: 100%; height: 100%;">
-        //
-        //         </svg>
-        //     `
-        //
-        // SVG.appendChild(_element)
-
         this.obj.columns.forEach((array, index) => {
 
 
@@ -128,12 +111,25 @@ class Graph {
 
     }
 
-    // Set the .bigWVG width bigger than screen width
+    // Set the .bigSVG width bigger than screen width
     // 1 element in this.obj.columns == 20px
     setBigSVGWidth(chartLength){
         const bigSVG = document.querySelector('.bigSVG')
 
         bigSVG.style.width = `${chartLength * 20}`
+    }
+
+    // Delete charts and save selector
+    clearPaths(){
+        const svgg = document.querySelector('#selector') // Save this element from
+        // deleting
+        const bigSVG = document.querySelector('.bigSVG')
+        const smallSVG = document.querySelector('.smallSVG')
+
+        bigSVG.innerHTML = ''
+        smallSVG.innerHTML = ''
+
+        smallSVG.appendChild(svgg)
     }
 
 }
