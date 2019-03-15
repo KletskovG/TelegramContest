@@ -1,9 +1,9 @@
 body{
     font-family: sans-serif;
-    width: 100vw;
+    /*width: 100vw;*/
     height: 100vh;
-    overflow: hidden;
-    /*margin: 0;*/
+    /*overflow: hidden;*/
+    margin-right: 8px;
 }
 
 path{

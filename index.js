@@ -1,4 +1,6 @@
 let  DATA // DATA form JSON file
+
+
 window.onload = async () => {
     // Read JSON
     await fetch('chart_data.json')

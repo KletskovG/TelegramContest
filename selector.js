@@ -10,16 +10,14 @@ class Selector{
         const selectorMain = document.querySelector('.selectMain')
         const smallSVG = document.querySelector('.smallSVG')
 
-        //Offsets
-
-
         const svg = document.querySelector('.selector svg')
-
 
         // Set width of the selector elements
         const smallSVGWidth = smallSVG.getBoundingClientRect().width
-        // TODO: set the width here
         selector.setAttributeNS(null, 'width',`${window.innerWidth}`)
+
+        const context = this
+
 
         for(let i = 0; i < selectorCorners.length; i++){
             selectorCorners[i].setAttributeNS(null, 'width', `${smallSVGWidth * 0.02}`)
@@ -34,8 +32,6 @@ class Selector{
         selectorMain.setAttributeNS(null, 'x', `${smallSVGWidth * 0.02}`)
         const selectorMainLen = rightCornerStartPos - smallSVGWidth * 0.02
         selectorMain.setAttributeNS(null, 'width', `${selectorMainLen}`)
-
-        const svgg = document.querySelector('.svgg')
 
         const rightCorner = document.querySelector('.rightCorner')
         moveCorner(rightCorner)
@@ -76,7 +72,12 @@ class Selector{
                     selectorMain.setAttributeNS(null, 'width', `${(+x1 - width)  - (+x2 - width) + 10}`)
                     const pos = leftCorner.getAttribute('x')
                     selectorMain.setAttributeNS(null, 'x',`${+pos +  10}`)
+
+                    context.resizeGraph()
+
                 }
+
+
             }
 
             function endDrag(corner) {
@@ -173,7 +174,7 @@ class Selector{
                     leftCorner.setAttributeNS(null, 'x', nextLeftPosition)
                     rightCorner.setAttributeNS(null, 'x', `${nextRightPosition}`)
 
-
+                    context.resizeGraph()
                 }
             }
 
@@ -189,6 +190,23 @@ class Selector{
         }
 
         moveMainSelector()
+    }
+
+    // Change the transform of the Graph and scale of the Graph
+    resizeGraph(){
+        const selectorCorners = document.querySelectorAll('.selectCorner')
+        const selector = document.querySelector('.selector')
+        const selectorMain = document.querySelector('.selectMain')
+        const bigSVG = document.querySelector('.bigSVG')
+
+        const svg = document.querySelector('.selector svg')
+
+
+        const x1 = selectorCorners[0].getAttribute('x')
+        const x2 = selectorCorners[1].getAttribute('x')
+
+
+
     }
 }
 
