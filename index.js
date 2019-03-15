@@ -9,7 +9,7 @@ window.onload = async () => {
         .catch(err => console.log(err))
 
     // TODO: Change DATA[0] to index thaty client is choosed
-    let obj = DATA[0] // select graph from json file
+    let obj = DATA[4] // select graph from json file
     const firstGraph = new Graph(obj)
     // Build Charts
     firstGraph.addToPath('smallSVG')

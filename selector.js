@@ -36,9 +36,6 @@ class Selector{
         selectorMain.setAttributeNS(null, 'width', `${selectorMainLen}`)
 
         const svgg = document.querySelector('.svgg')
-        document.querySelector('.svgg').addEventListener('click', (e)=>{
-            svgg.style.left = `200px`
-        })
 
         const rightCorner = document.querySelector('.rightCorner')
         moveCorner(rightCorner)
@@ -192,12 +189,6 @@ class Selector{
         }
 
         moveMainSelector()
-    }
-
-    createSelector(){
-
-
-        document.querySelector('.smallSVG').prepend(foreignObject)
     }
 }
 
