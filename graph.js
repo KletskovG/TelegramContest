@@ -44,7 +44,26 @@ class Graph {
 
         const max = this.defineMax()
 
+        // TODO: Refactor this code, must create <foreignObject> and add paths to this
+        //  element
+        // const _element = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject')
+        // _element.style.cssText = `
+        //         width:100%;
+        //         height: 100%;
+        //     `
+        // _element.setAttributeNS(null, 'width', '1440')
+        // _element.setAttributeNS(null, 'height', '440')
+        // _element.innerHTML = `
+        //         <svg id="#${selector}" style="width: 100%; height: 100%;">
+        //
+        //         </svg>
+        //     `
+        //
+        // SVG.appendChild(_element)
+
         this.obj.columns.forEach((array, index) => {
+
+
             if(index > 0){
                 let xPos = 0
 

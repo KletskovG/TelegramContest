@@ -1,12 +1,33 @@
 body{
     font-family: sans-serif;
     width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     /*margin: 0;*/
 }
 
 path{
     stroke-width: 4;
 }
+
+.bigSVG {
+    height: 400px;
+}
+
+li{
+    list-style: none;
+}
+
+.selector{
+    position: absolute;
+    opacity: 0.7;
+}
+
+.wholeSelector{
+    position: relative;
+}
+
+
 
 
 svg{
@@ -15,10 +36,6 @@ svg{
 
 .smallSVG{
     background: #F5F9FB;
-}
-
-.selector{
-    opacity: 0.7;
 }
 
 .smallPaths{

@@ -54,7 +54,6 @@ class Selector{
 
             function checkForCornersCollision(){
                 const x1 = selectorCorners[0].getAttribute('x')
-                console.log(selectorCorners[0])
                 const x2 = selectorCorners[1].getAttribute('x')
 
                 return x2 - x1;
@@ -76,9 +75,10 @@ class Selector{
                     elem.setAttributeNS(null, 'x', `${corner.clientX - width}`)
 
                     // Change position of the main section of selector
+                    // TODO: change + 10 to percents of the window.innerWidth
                     selectorMain.setAttributeNS(null, 'width', `${(+x1 - width)  - (+x2 - width) + 10}`)
                     const pos = leftCorner.getAttribute('x')
-                    selectorMain.setAttributeNS(null, 'x',`${pos +  10}`)
+                    selectorMain.setAttributeNS(null, 'x',`${+pos +  10}`)
                 }
             }
 
@@ -97,10 +97,16 @@ class Selector{
             let isPressed = false
             let mousePos
 
+            const width = +rightCorner.getAttribute('width')
+
 
             function startDragMain(evt){
                 isPressed = true
                 mousePos = calculateOffset(evt)
+                // const x1 = selectorCorners[0].getAttribute('x')
+                // const x2 = selectorCorners[1].getAttribute('x')
+                //
+                // selectorMain.setAttributeNS(null, 'width', `${parseInt((+x1 - width)  - (+x2 - width) + 10)}`)
             }
 
             // Find the offset between mouse and corners and mainSelector
@@ -114,20 +120,63 @@ class Selector{
                 return mousePos - leftPosition
             }
 
+            // Return posotions of right and left corners
+            function getCornersPosition(){
+                return {
+                    rightPos : Number(rightCorner.getAttribute('x')),
+                    leftPos: Number(leftCorner.getAttribute('x'))
+                }
+            }
+
+            function checkForCornerCollsion(nextRightPosition, nextLeftPosition){
+                const positions = getCornersPosition()
+
+                if(nextLeftPosition >= 0){
+
+
+                    return true
+                }
+
+                else{
+                    console.log(`${nextLeftPosition}    ${positions.leftPos}`)
+
+                    if(nextLeftPosition > positions.leftPos){
+                        return true
+                    }
+                }
+
+
+                return false
+            }
+
             function dragMain(evt){
                 const selectorWidth = selectorMain.getBoundingClientRect().width
 
+
+                const selectorMainX = selectorMain.getAttribute('x')
+
+                const nextRightPosition = +selectorMainX + selectorWidth
+                const nextLeftPosition = +selectorMainX
+
+                const x1 = selectorCorners[0].getAttribute('x')
+                const x2 = selectorCorners[1].getAttribute('x')
+
+                selectorMain.setAttributeNS(null, 'width', `${+x1 - +x2}`)
+
+
                 if(isPressed){
 
+                    checkForCornerCollsion(nextRightPosition, nextLeftPosition)
+
                     // Change position of the main selector
-                    selectorMain.setAttributeNS(null, 'x', `${evt.clientX - mousePos}`)
+                    selectorMain.setAttributeNS(null, 'x', `${+evt.clientX - +mousePos}`)
+
 
                     // Change position of the corners
-                    const selectorMainX = selectorMain.getAttribute('x')
-                    leftCorner.setAttributeNS(null, 'x', selectorMainX)
-                    const rightCornerPosition = Number(+selectorMainX + selectorMainLen)
+                    leftCorner.setAttributeNS(null, 'x', nextLeftPosition)
+                    rightCorner.setAttributeNS(null, 'x', `${nextRightPosition}`)
 
-                    rightCorner.setAttributeNS(null, 'x', `${rightCornerPosition}`)
+
                 }
             }
 
