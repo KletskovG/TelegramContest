@@ -18,5 +18,9 @@ window.onload = async () => {
 
     selector.dragSelector()
 
+
+
 }
+
+
 
