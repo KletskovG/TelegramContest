@@ -1,6 +1,9 @@
 class Graph {
     constructor(obj){
-        this.obj = obj
+        this.WholeObj = obj
+        this.obj = obj[0]
+
+        console.log(this.obj)
     }
 
     showData(){
@@ -120,7 +123,9 @@ class Graph {
     }
 
     // Delete charts and save selector
-    clearPaths(){
+    clearPaths(index){
+        this.obj = this.WholeObj[index]
+
         const svgg = document.querySelector('#selector') // Save this element from
         // deleting
         const bigSVG = document.querySelector('.bigSVG')
