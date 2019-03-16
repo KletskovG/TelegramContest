@@ -1,12 +1,33 @@
 body{
     font-family: sans-serif;
-    width: 100vw;
-    /*margin: 0;*/
+    /*width: 100vw;*/
+    height: 100vh;
+    /*overflow: hidden;*/
+    margin-right: 8px;
 }
 
 path{
     stroke-width: 4;
 }
+
+.bigSVG {
+    height: 400px;
+}
+
+li{
+    list-style: none;
+}
+
+.selector{
+    position: absolute;
+    opacity: 0.7;
+}
+
+.wholeSelector{
+    position: relative;
+}
+
+
 
 
 svg{
@@ -15,6 +36,16 @@ svg{
 
 .smallSVG{
     background: #F5F9FB;
+}
+
+.smallPaths{
+    width: 1440px;
+    height: 120px;
+}
+
+.smallSVG path,
+.smallSVG circle{
+    z-index: -10;
 }
 
 .selectCorner{

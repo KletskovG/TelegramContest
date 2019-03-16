@@ -1,76 +1,47 @@
-let DATA // DATA form JSON file
+let  DATA // DATA form JSON file
 
-function setTheCoreners(){
-    const corners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < corners.length; i++){
-        corners[i].addEventListener('', ()=>{
-
-        })
-    }
-}
 
 window.onload = async () => {
-
+    // Read JSON
     await fetch('chart_data.json')
         .then(res => res.json())
         .then(res => DATA = res)
         .catch(err => console.log(err))
 
     // TODO: Change DATA[0] to index thaty client is choosed
-    let obj = DATA[0]
+    let obj = DATA // select graph from json file
+
+    const selector = new Selector()
+
     const firstGraph = new Graph(obj)
-    firstGraph.addToPath('smallSVG')
-    firstGraph.addToPath('bigSVG')
 
-    const selectorCorners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < selectorCorners.length; i++){
-        // makeDraggable(selectorCorners[i])
+    // Delete current charts and build new
+    function rebuildGraph(index, GraphObject){
+        const radioInputs = document.querySelectorAll('.selectGraphs input')
+        for(let i = 0; i < radioInputs.length; i++){
+            if(radioInputs[i].checked === true){
+                firstGraph.clearPaths(i)
 
-        // moveSection(selectorCorners[i],'350','0')
-    }
-}
-
-
-// TODO: stop here trying to make selector corners move right
-function makeDraggable(elem){
-    let svg = elem;
-    svg.addEventListener('mousedown', startDrag);
-    svg.addEventListener('mousemove', drag);
-    svg.addEventListener('mouseup', endDrag);
-    svg.addEventListener('mouseleave', endDrag);
-
-    let selectedElement = false
-    let offset
-
-    let prevX
-
-    function startDrag(elem) {
-        if(elem.classList.contains('selectCorner')){
-            selectedElement = elem
+                firstGraph.addToPath('smallSVG')
+                firstGraph.addToPath('bigSVG')
+            }
         }
     }
 
-    function getMousePosition(elem) {
+    // Make selector draggable
+    selector.dragSelector()
 
+    // Build Charts
+    firstGraph.addToPath('smallSVG')
+    firstGraph.addToPath('bigSVG')
+
+    // Select the graphs here
+    const radioInputs = document.querySelectorAll('.selectGraphs input')
+    for(let i = 0; i < radioInputs.length; i++){
+        radioInputs[i].addEventListener('click',rebuildGraph)
     }
 
-    function drag(elem) {
-        let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-        elem.setAttribute('transform', transformAttr);
-    }
-
-    function endDrag(elem) {
-
-    }
 }
-
-// function moveSection(elem, xOffset, yOffset) {
-//
-//     if (elem.classList.contains('selectCorner')) {
-//         let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-//         elem.setAttribute('transform', transformAttr);
-//     }
-// }
 
 
 

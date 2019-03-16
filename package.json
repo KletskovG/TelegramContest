@@ -7,17 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KletskovG/TelegramContest.git"
-  },
-  "engines": {
-    "node" : "10.x"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KletskovG/TelegramContest/issues"
-  },
-  "homepage": "https://github.com/KletskovG/TelegramContest#readme"
+  "dependencies": {
+    "ncp": "^2.0.0"
+  }
 }
