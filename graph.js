@@ -1,6 +1,9 @@
-class Graph{
+class Graph {
     constructor(obj){
-        this.obj = obj
+        this.WholeObj = obj
+        this.obj = obj[0]
+
+        console.log(this.obj)
     }
 
     showData(){
@@ -34,9 +37,10 @@ class Graph{
     }
 
     // Build Chrats
-    // TODO: REfactor % add <g> and append paths to this tag
     // TODO: also set the stroke and so on to this tag
     addToPath(selector){
+        this.setBigSVGWidth(this.obj.columns[0].length)
+
         const SVG = document.querySelector(`.${selector}`)
         const rectSVG = SVG.getBoundingClientRect()
         const intervalBetweenPoints = rectSVG.width / this.obj.columns[0].length
@@ -44,6 +48,8 @@ class Graph{
         const max = this.defineMax()
 
         this.obj.columns.forEach((array, index) => {
+
+
             if(index > 0){
                 let xPos = 0
 
@@ -72,8 +78,8 @@ class Graph{
                         circle.setAttributeNS(null, 'r', "1")
                         this.colorElement(circle, this.obj.columns[index][0])
 
-                        SVG.appendChild(path)
-                        SVG.appendChild(circle)
+                        SVG.prepend(path)
+                        SVG.prepend(circle)
                     }
 
                     else{
@@ -96,8 +102,8 @@ class Graph{
                         this.colorElement(circle, this.obj.columns[index][0])
 
 
-                        SVG.appendChild(path)
-                        SVG.appendChild(circle)
+                        SVG.prepend(path)
+                        SVG.prepend(circle)
                     }
 
                     xPos += intervalBetweenPoints
@@ -107,4 +113,37 @@ class Graph{
 
 
     }
+
+    // Set the .bigSVG width bigger than screen width
+    // 1 element in this.obj.columns == 20px
+    setBigSVGWidth(chartLength){
+        const bigSVG = document.querySelector('.bigSVG')
+
+        bigSVG.style.width = `${chartLength *20}`
+    }
+
+    // Delete charts and save selector
+    clearPaths(index){
+        this.obj = this.WholeObj[index]
+
+        const svgg = document.querySelector('#selector') // Save this element from
+        // deleting
+        const bigSVG = document.querySelector('.bigSVG')
+        const smallSVG = document.querySelector('.smallSVG')
+
+        bigSVG.innerHTML = ''
+        smallSVG.innerHTML = ''
+
+        smallSVG.appendChild(svgg)
+    }
+
+    ReadNames(){
+        const param=this.obj.names
+        for (let key in param){
+            console.log(key + ' - '+ param[key])
+        }
+    }
+    
+    
+
 }

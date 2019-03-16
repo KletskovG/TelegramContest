@@ -9,17 +9,22 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<div id="app">
     <h2>
         Followers
     </h2>
 
-    <svg width="1440" height="400" class="bigSVG">
+    <svg width="1440" height="400" class="big">
+        <foreignObject style="width: 100%;height: 100%;" width="1440" height="400">
+            <svg class="bigSVG">
 
+            </svg>
+        </foreignObject>
     </svg>
 
     <svg width="1440" height="120" class="smallSVG">
         <foreignObject id="selector"
-                       
+
                        height="120"
                        class="selector"
                        fill="black"
@@ -51,8 +56,42 @@
         </foreignObject>
     </svg>
 
+    <form action="" class="selectGraphs">
+        <label >
+            <input type="radio" name="gender" value="0" defer> First Graph <br>
+            
+        </label>
+
+        <label>
+            <input type="radio" name="gender" value="1" > Second Graph<br>
+        </label>
+
+        <label>
+            <input type="radio" name="gender" value="2"> Third Graph<br>
+        </label>
+        
+        <label>
+            <input type="radio" name="gender" value="3"> Fourth Graph<br>
+        </label>
+
+        <label>
+            <input type="radio" name="gender" value="4"> Fifth Graph            
+        </label>
+    </form>
+    <form action="" class="selectLine">
+        <label>
+            <input type="radio" name="gender" value="0" defer>First Line<br>
+        </label>
+        <label>
+            <input type="radio" name="gender" value="1" defer>Second Line
+        </label>
+    </form>
+
+</div>
+
     <script src="graph.js" defer></script>
     <script src="selector.js" defer></script>
     <script src="index.js" defer></script>
+
 </body>
 </html>
