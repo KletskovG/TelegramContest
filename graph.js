@@ -119,7 +119,8 @@ class Graph {
     setBigSVGWidth(chartLength){
         const bigSVG = document.querySelector('.bigSVG')
 
-        bigSVG.style.width = `${chartLength *20}`
+
+        bigSVG.style.width = `${chartLength * 20}`
     }
 
     // Delete charts and save selector
@@ -137,13 +138,12 @@ class Graph {
         smallSVG.appendChild(svgg)
     }
 
+
     ReadNames(){
         const param=this.obj.names
         for (let key in param){
             console.log(key + ' - '+ param[key])
         }
     }
-    
-    
 
 }
