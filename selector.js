@@ -168,10 +168,7 @@ class Selector{
                     checkForCornerCollsion(nextRightPosition, nextLeftPosition)
 
                     // Change position of the main selector
-
-                    if(+evt.clientX - +mousePos + nextRightPosition-nextLeftPosition+37<document.documentElement.clientWidth && +evt.clientX - +mousePos >0 ){
-
-
+                    if(+evt.clientX - +mousePos + nextRightPosition - nextLeftPosition+37 < document.documentElement.clientWidth && +evt.clientX - +mousePos > 0 ){
 
                         selectorMain.setAttributeNS(null, 'x', `${+evt.clientX - +mousePos}`)
                     }
