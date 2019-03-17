@@ -1,7 +1,6 @@
-
-//import { runInThisContext } from "vm";
-
 let  DATA // DATA form JSON file
+
+
 window.onload = async () => {
     // Read JSON
     await fetch('chart_data.json')
@@ -19,27 +18,6 @@ window.onload = async () => {
     // Delete current charts and build new
     function rebuildGraph(index, GraphObject){
         const radioInputs = document.querySelectorAll('.selectGraphs input')
-        const radioInputNew = document.querySelectorAll('.selectLine input')
-        for(let i = 0; i < radioInputs.length; i++){
-            if(radioInputs[i].checked === true){
-                firstGraph.clearPaths(i)
-
-                firstGraph.addToPath('smallSVG')
-                firstGraph.addToPath('bigSVG')
-                firstGraph.ReadNames()
-            }
-        }
-        for(let i = 0; i < radioInputNew.length; i++){
-            if(radioInputs[i].checked === true){
-                firstGraph.clearPaths(i)
-
-    const selector = new Selector()
-
-    const firstGraph = new Graph(obj)
-
-    // Delete current charts and build new
-    function rebuildGraph(index, GraphObject){
-        const radioInputs = document.querySelectorAll('.selectGraphs input')
         for(let i = 0; i < radioInputs.length; i++){
             if(radioInputs[i].checked === true){
                 firstGraph.clearPaths(i)
@@ -49,27 +27,6 @@ window.onload = async () => {
             }
         }
     }
-
-    // Make selector draggable
-    selector.dragSelector()
-
-    // Build Charts
-    firstGraph.addToPath('smallSVG')
-    firstGraph.addToPath('bigSVG')
-
-    // Select the graphs here
-    const radioInputs = document.querySelectorAll('.selectGraphs input')
-    for(let i = 0; i < radioInputs.length; i++){
-        radioInputs[i].addEventListener('click',rebuildGraph)    
-    }
-
-    const radioInputNew = document.querySelectorAll('.selectLine input')
-    for(let i = 0; i < radioInputNew.length; i++){
-        radioInputNew[i].addEventListener('click',buildLine)  
-    }
-    
-
-}
 
     // Make selector draggable
     selector.dragSelector()
