@@ -69,3 +69,8 @@ window.onload = async () => {
         radioInputNew[i].addEventListener('click', buildLine)
     }
 }
+
+// TODO: delete it!
+window.addEventListener('click', ()=>{
+    document.querySelector('#bigSVG-2').style.transform = 'translateY(-20px)'
+})
