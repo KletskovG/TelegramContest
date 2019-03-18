@@ -1,3 +1,5 @@
+ // MAKE big svg width in percents
+
 class Graph {
     constructor(obj){
         this.WholeObj = obj
@@ -27,13 +29,8 @@ class Graph {
     // Colors the element
     colorElement(element, firstElementOfArray){
         const color = this.obj.colors[firstElementOfArray]
-        if(element.tagName === 'circle'){
-            element.setAttributeNS(null, 'fill', `${color}`)
-        }
-
-        else{
-            element.setAttributeNS(null, 'stroke', `${color}`)
-        }
+        element.setAttributeNS(null, 'fill', `${color}`)
+        element.setAttributeNS(null, 'stroke', `${color}`)
     }
 
     // set the coordiantes of the path or circle
@@ -45,20 +42,16 @@ class Graph {
         else if(element.tagName === 'circle'){
             element.setAttributeNS(null, 'cx', `${startX}`)
             element.setAttributeNS(null, 'cy', `${startY}`)
-            element.setAttributeNS(null, 'r', "2")
+            element.setAttributeNS(null, 'r', "1")
         }
     }
 
     //create element where paths and circles will be added
     createWrapForChart(selector, index, SVG){
         const wrap = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject')
-
-        console.log(SVG.getBoundingClientRect())
-
         const width = SVG.getBoundingClientRect().width
         const height= SVG.getBoundingClientRect().height
 
-        console.log(width, height)
         wrap.setAttributeNS(null, 'width', `${width}`)
         wrap.setAttributeNS(null, 'height', `${height}`)
 
@@ -68,14 +61,11 @@ class Graph {
             </svg>    
         `
 
-        SVG.appendChild(wrap)
+        SVG.prepend(wrap)
 
-        console.log(wrap)
     }
 
     // Build Chrats
-    // TODO: also set the stroke and so on to this tag
-    // TODO: TODAY also add paths and cirlces to unique element
     addToPath(selector){
         this.setBigSVGWidth(this.obj.columns[0].length)
 
@@ -106,6 +96,8 @@ class Graph {
                     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
 
                     if(curr === max){
+                        this.colorElement(wrap, this.obj.columns[index][0])
+
                         posOnTheScreen = 2
 
                         //This consts will be added in to coords of the path and circle
@@ -115,16 +107,20 @@ class Graph {
                         const endY = posOnTheScreen
 
                         this.setTheCoordsOfElement(path,startX, startY, endX, endY)
-                        this.colorElement(path, this.obj.columns[index][0])
+
 
                         this.setTheCoordsOfElement(circle,startX,startY)
-                        this.colorElement(circle, this.obj.columns[index][0])
+                        // this.colorElement(circle, this.obj.columns[index][0])
 
-                        wrap.prepend(path)
-                        wrap.prepend(circle)
+                        wrap.appendChild(path)
+                        wrap.appendChild(circle)
+
+
                     }
 
                     else{
+                        this.colorElement(wrap, this.obj.columns[index][0])
+
 
                         let percent = parseInt((curr * 100) / max);
                         posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
@@ -138,13 +134,13 @@ class Graph {
                         const endY = posOnTheScreen
 
                         this.setTheCoordsOfElement(path,startX, startY, endX, endY)
-                        this.colorElement(path, this.obj.columns[index][0])
+                        // this.colorElement(path, this.obj.columns[index][0])
 
                         this.setTheCoordsOfElement(circle,startX,startY)
-                        this.colorElement(circle, this.obj.columns[index][0])
+                        // this.colorElement(circle, this.obj.columns[index][0])
 
-                        wrap.prepend(path)
-                        wrap.prepend(circle)
+                        wrap.appendChild(path)
+                        wrap.appendChild(circle)
                     }
 
                     xPos += intervalBetweenPoints
@@ -176,7 +172,6 @@ class Graph {
 
         smallSVG.appendChild(svgg)
     }
-
 
     // Read names of charts in the graph
     ReadNames(){

@@ -1,14 +1,15 @@
 //import { runInThisContext } from "vm";
+// TODO: Handle touches
 
 let  DATA // DATA form JSON file
+
 window.onload = async () => {
     // Read JSON
     await fetch('chart_data.json')
-        .then(res => res.json())
-        .then(res => DATA = res)
-        .catch(err => console.log(err))
+         .then(res => res.json())
+         .then(res => DATA = res)
+         .catch(err => console.log(err))
 
-    // TODO: Change DATA[0] to index thaty client is choosed
     let obj = DATA // select graph from json file
 
     const selector = new Selector()
@@ -16,7 +17,7 @@ window.onload = async () => {
     const firstGraph = new Graph(obj)
 
     // Delete current charts and build new
-    function rebuildGraph(index, GraphObject) {
+    function rebuildGraph() {
         const radioInputs = document.querySelectorAll('.selectGraphs input')
         const radioInputNew = document.querySelectorAll('.selectLine input')
         for (let i = 0; i < radioInputs.length; i++) {
@@ -64,8 +65,39 @@ window.onload = async () => {
     }
 
     // Select names here
-    const radioInputNew = document.querySelectorAll('.selectLine input')
-    for (let i = 0; i < radioInputNew.length; i++) {
-        radioInputNew[i].addEventListener('click', buildLine)
+    // const radioInputNew = document.querySelectorAll('.selectLine input')
+    // for (let i = 0; i < radioInputNew.length; i++) {
+    //     radioInputNew[i].addEventListener('click', buildLine)
+    // }
+
+    CircleHover()
+}
+
+
+// TODO DElete it !!
+window.addEventListener('mousemove', (evt)=>{
+    const circles = document.querySelectorAll('.big circle')
+
+    for(let i = 0; i < circles.length; i++){
+        if(circles[i].getBoundingClientRect().left === evt.clientX){
+            circles[i].setAttributeNS(null, 'r', '5')
+        }
+
+    }
+})
+
+// TODO: delete it
+function CircleHover() {
+    const circles = document.querySelectorAll('.big circle')
+
+    function getPos(el){
+        console.log(el.offsetLeft, el.clientLeft)
+
+        return +el.offsetLeft + +el.clientLeft
+    }
+
+
+    for(let i = 0; i < circles.length; i++){
+        console.log(getPos(circles[i]))
     }
 }
