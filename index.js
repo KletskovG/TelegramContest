@@ -1,76 +1,105 @@
+//import { runInThisContext } from "vm";
+// TODO: Handle touches
+
 let DATA // DATA form JSON file
 
-function setTheCoreners(){
-    const corners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < corners.length; i++){
-        corners[i].addEventListener('', ()=>{
-
-        })
-    }
-}
-
 window.onload = async () => {
-
+    // Read JSON
     await fetch('chart_data.json')
         .then(res => res.json())
         .then(res => DATA = res)
         .catch(err => console.log(err))
 
-    // TODO: Change DATA[0] to index thaty client is choosed
-    let obj = DATA[0]
+    let obj = DATA // select graph from json file
+
+    const selector = new Selector()
+
     const firstGraph = new Graph(obj)
+
+    // Delete current charts and build new
+    function rebuildGraph() {
+        const radioInputs = document.querySelectorAll('.selectGraphs input')
+        //const radioInputNew = document.querySelectorAll('.selectLine input')
+        for (let i = 0; i < radioInputs.length; i++) {
+            if (radioInputs[i].checked == true) {
+                firstGraph.clearPaths(i)
+
+                firstGraph.addToPath('smallSVG')
+                firstGraph.addToPath('bigSVG')
+
+            }
+        }
+        /*
+        for (let i = 0; i < radioInputNew.length; i++) {
+            if (radioInputs[i].checked == true) {
+                firstGraph.clearPaths(i)
+
+                // Make selector draggable
+                //selector.dragSelector()
+
+                // Build Charts
+                firstGraph.addToPath('smallSVG')
+                firstGraph.addToPath('bigSVG')
+
+            }
+
+            // Select the graphs here
+            const radioInputs = document.querySelectorAll('.selectGraphs input')
+            for (let i = 0; i < radioInputs.length; i++) {
+                radioInputs[i].addEventListener('click', rebuildGraph)
+            }
+            
+
+        }*/
+
+    }
+
+    selector.dragSelector()
+
+    // Build Charts
     firstGraph.addToPath('smallSVG')
     firstGraph.addToPath('bigSVG')
 
-    const selectorCorners = document.querySelectorAll('.selectCorner')
-    for(let i = 0; i < selectorCorners.length; i++){
-        // makeDraggable(selectorCorners[i])
+    // Select the graphs and names here
+    const radioInputs = document.querySelectorAll('.selectGraphs input')
+    let k = 0
 
-        // moveSection(selectorCorners[i],'350','0')
+    for (let i = 0; i < radioInputs.length; i++) {
+        const idName = radioInputs[i].attributes[2].value
+
+        radioInputs[i].addEventListener('click', () => {rebuildGraph(),firstGraph.ReadNames(idName)})
     }
+
+    
+
+    //CircleHover()
 }
 
 
-// TODO: stop here trying to make selector corners move right
-function makeDraggable(elem){
-    let svg = elem;
-    svg.addEventListener('mousedown', startDrag);
-    svg.addEventListener('mousemove', drag);
-    svg.addEventListener('mouseup', endDrag);
-    svg.addEventListener('mouseleave', endDrag);
+// TODO DElete it !!
+window.addEventListener('mousemove', (evt) => {
+    const circles = document.querySelectorAll('.big circle')
 
-    let selectedElement = false
-    let offset
-
-    let prevX
-
-    function startDrag(elem) {
-        if(elem.classList.contains('selectCorner')){
-            selectedElement = elem
+    for (let i = 0; i < circles.length; i++) {
+        if (circles[i].getBoundingClientRect().left === evt.clientX) {
+            circles[i].setAttributeNS(null, 'r', '5')
         }
-    }
-
-    function getMousePosition(elem) {
 
     }
+})
 
-    function drag(elem) {
-        let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-        elem.setAttribute('transform', transformAttr);
+// TODO: delete it
+function CircleHover() {
+    const circles = document.querySelectorAll('.big circle')
+
+    function getPos(el) {
+        console.log(el.offsetLeft, el.clientLeft)
+
+        return +el.offsetLeft + +el.clientLeft
     }
 
-    function endDrag(elem) {
 
+    for (let i = 0; i < circles.length; i++) {
+        console.log(getPos(circles[i]))
     }
 }
-
-// function moveSection(elem, xOffset, yOffset) {
-//
-//     if (elem.classList.contains('selectCorner')) {
-//         let transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-//         elem.setAttribute('transform', transformAttr);
-//     }
-// }
-
-
-
