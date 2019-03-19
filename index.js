@@ -4,22 +4,23 @@
 let  DATA // DATA form JSON file
 
 window.onload = async () => {
+    // const inputs = document.querySelectorAll('.selectLine input')
+    // console.log(inputs)
+
     // Read JSON
     await fetch('chart_data.json')
          .then(res => res.json())
          .then(res => DATA = res)
          .catch(err => console.log(err))
 
-    let obj = DATA // select graph from json file
-
+    const firstGraph = new Graph(DATA)
     const selector = new Selector()
-
-    const firstGraph = new Graph(obj)
 
     // Delete current charts and build new
     function rebuildGraph() {
         const radioInputs = document.querySelectorAll('.selectGraphs input')
         const radioInputNew = document.querySelectorAll('.selectLine input')
+
         for (let i = 0; i < radioInputs.length; i++) {
             if (radioInputs[i].checked === true) {
                 firstGraph.clearPaths(i)
@@ -29,34 +30,33 @@ window.onload = async () => {
                 firstGraph.ReadNames()
             }
         }
+
         for (let i = 0; i < radioInputNew.length; i++) {
+            console.log(radioInputs)
             if (radioInputs[i].checked === true) {
                 firstGraph.clearPaths(i)
 
-                // Make selector draggable
-                // selector.dragSelector()
-
                 // Build Charts
                 firstGraph.addToPath('smallSVG')
-                firstGraph.addToPath('bigSVG')
-
+                firstGraph.ResizeGraph()
             }
 
             // Select the graphs here
-            const radioInputs = document.querySelectorAll('.selectGraphs input')
-            for (let i = 0; i < radioInputs.length; i++) {
-                radioInputs[i].addEventListener('click', rebuildGraph)
-            }
-
         }
 
     }
+
+    // Create custom Event to resize Graph
+    window.addEventListener('rebuild', (evt)=>{
+        firstGraph.ResizeGraph()
+    })
+
 
     selector.dragSelector()
 
     // Build Charts
     firstGraph.addToPath('smallSVG')
-    firstGraph.addToPath('bigSVG')
+    firstGraph.ResizeGraph()
 
     // Select the graphs here
     const radioInputs = document.querySelectorAll('.selectGraphs input')
@@ -67,37 +67,8 @@ window.onload = async () => {
     // Select names here
     // const radioInputNew = document.querySelectorAll('.selectLine input')
     // for (let i = 0; i < radioInputNew.length; i++) {
-    //     radioInputNew[i].addEventListener('click', buildLine)
+    //
+    //     radioInputNew[i].addEventListener('click', )
     // }
 
-    CircleHover()
-}
-
-
-// TODO DElete it !!
-window.addEventListener('mousemove', (evt)=>{
-    const circles = document.querySelectorAll('.big circle')
-
-    for(let i = 0; i < circles.length; i++){
-        if(circles[i].getBoundingClientRect().left === evt.clientX){
-            circles[i].setAttributeNS(null, 'r', '5')
-        }
-
-    }
-})
-
-// TODO: delete it
-function CircleHover() {
-    const circles = document.querySelectorAll('.big circle')
-
-    function getPos(el){
-        console.log(el.offsetLeft, el.clientLeft)
-
-        return +el.offsetLeft + +el.clientLeft
-    }
-
-
-    for(let i = 0; i < circles.length; i++){
-        console.log(getPos(circles[i]))
-    }
 }

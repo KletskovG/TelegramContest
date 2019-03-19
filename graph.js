@@ -1,11 +1,9 @@
  // MAKE big svg width in percents
 
-class Graph {
+ class Graph {
     constructor(obj){
         this.WholeObj = obj
         this.obj = obj[0]
-
-        console.log(this.obj)
     }
 
     showData(){
@@ -34,9 +32,10 @@ class Graph {
     }
 
     // set the coordiantes of the path or circle
-    setTheCoordsOfElement(element ,startX, startY, endX, endY){
+    setTheCoordsOfElement(element ,startX, startY, endX, endY, attr){
         if(element.tagName === 'path'){
             element.setAttributeNS(null, 'd', `M${startX}, ${startY} L${endX}, ${endY}`)
+            element.setAttribute('data-index', `${attr}`)
         }
 
         else if(element.tagName === 'circle'){
@@ -49,6 +48,7 @@ class Graph {
     //create element where paths and circles will be added
     createWrapForChart(selector, index, SVG){
         const wrap = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject')
+        wrap.classList.add('wrap')
         const width = SVG.getBoundingClientRect().width
         const height= SVG.getBoundingClientRect().height
 
@@ -65,88 +65,177 @@ class Graph {
 
     }
 
-    // Build Chrats
-    addToPath(selector){
-        this.setBigSVGWidth(this.obj.columns[0].length)
+
+
+    // Build Charts
+    addToPath(selector, charts = this.obj.columns){
 
         const SVG = document.querySelector(`.${selector}`)
+        SVG.style.width = `${innerWidth}`
         const rectSVG = SVG.getBoundingClientRect()
-        const intervalBetweenPoints = rectSVG.width / this.obj.columns[0].length
-
+        const intervalBetweenPoints = rectSVG.width / charts[1].length
         const max = this.defineMax()
 
-        this.obj.columns.forEach((array, index) => {
+        console.log(charts[1].length)
 
-            if(index > 0){
-                //Create wrap for chart
-                this.createWrapForChart(selector,index,SVG)
-                const wrap = document.querySelector(`#${selector}-${index}`)
+        charts.forEach((array, index) => {
 
-                let xPos = 0
+                if(index > 0){
 
-                for(let i = 2; i < array.length;i++){
-                    const curr = array[i]
-                    const prev = array[i - 1]
+                    //Create wrap for chart
+                    this.createWrapForChart(selector,index,SVG)
+                    const wrap = document.querySelector(`#${selector}-${index}`)
 
-                    let posOnTheScreen
-                    let prevPercent = parseInt(prev * 100 / max)
-                    let prevPos = parseInt(rectSVG.height * prevPercent / 100)
+                    let xPos = intervalBetweenPoints * 2
 
-                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+                    let startOfTheLoop
+                    typeof charts[1][0] === 'string' ? startOfTheLoop = 2 : startOfTheLoop = 1
 
-                    if(curr === max){
-                        this.colorElement(wrap, this.obj.columns[index][0])
+                    // // Set the 0 element of the chart
+                    // // TODO: fix the bug with the startY
+                    // const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+                    // const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+                    //
+                    // const startX = 0
+                    // const startY = parseInt(array[startOfTheLoop - 1] * 100 / max)
+                    //
+                    // const endX = intervalBetweenPoints
+                    //
+                    // let percent = parseInt((array[startOfTheLoop - 1] * 100) / max);
+                    // let posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
+                    //
+                    // const endY = posOnTheScreen
+                    //
+                    // this.setTheCoordsOfElement(path,startX, startY, startX, startY, startOfTheLoop - 1)
+                    // this.setTheCoordsOfElement(circle,startX,startY)
+                    // wrap.appendChild(path)
+                    // wrap.appendChild(circle)
 
-                        posOnTheScreen = 2
+                    for(let i = startOfTheLoop; i < array.length;i++){
+                        const curr = array[i]
+                        const prev = array[i - 1]
 
-                        //This consts will be added in to coords of the path and circle
-                        const startX = xPos - intervalBetweenPoints
-                        const startY = prevPos
-                        const endX = xPos
-                        const endY = posOnTheScreen
+                        let posOnTheScreen
+                        let prevPercent = parseInt(prev * 100 / max)
+                        let prevPos = parseInt(rectSVG.height * prevPercent / 100)
 
-                        this.setTheCoordsOfElement(path,startX, startY, endX, endY)
-
-
-                        this.setTheCoordsOfElement(circle,startX,startY)
-                        // this.colorElement(circle, this.obj.columns[index][0])
-
-                        wrap.appendChild(path)
-                        wrap.appendChild(circle)
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+                        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
 
 
+                        if(curr === max){
+                            this.colorElement(wrap, this.obj.columns[index][0])
+
+                            posOnTheScreen = 2
+
+                            //This consts will be added in to coords of the path and circle
+                            const startX = xPos - intervalBetweenPoints
+                            const startY = prevPos
+                            const endX = xPos
+                            const endY = posOnTheScreen
+
+                            this.setTheCoordsOfElement(path,startX, startY, endX, endY, i)
+                            this.setTheCoordsOfElement(circle,startX,startY)
+                            // this.colorElement(circle, this.obj.columns[index][0])
+
+                            wrap.appendChild(path)
+                            wrap.appendChild(circle)
+                        }
+
+                        else{
+                            this.colorElement(wrap, this.obj.columns[index][0])
+
+
+                            let percent = parseInt((curr * 100) / max);
+                            posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
+
+                            if(prev === max) prevPos = 2
+
+                            // This consts will be added in to the coords of the elements
+                            const startX = xPos - intervalBetweenPoints
+                            const startY = prevPos
+                            const endX = xPos
+                            const endY = posOnTheScreen
+
+                            this.setTheCoordsOfElement(path,startX, startY, endX, endY, i)
+                            this.setTheCoordsOfElement(circle,startX,startY)
+
+                            wrap.appendChild(path)
+                            wrap.appendChild(circle)
+                        }
+
+                        xPos += intervalBetweenPoints
                     }
 
-                    else{
-                        this.colorElement(wrap, this.obj.columns[index][0])
+                    // const zeroPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+                    // const zeroCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+                    //
+                    // const endCircle = wrap.querySelector('circle')
+                    //
+                    // const startX = 0
+                    // const startY = array[startOfTheLoop - 1] * 100 / max
+                    // const endX = intervalBetweenPoints
+                    //
+                    // const endY = array[startOfTheLoop] * 100 / max
+                    // console.log(`startX - ${startX}, startY - ${startY}, endX - ${endX}, endY - ${endY}`)
+                    //
+                    // this.setTheCoordsOfElement(zeroPath,startX, startY, endX, endY, startOfTheLoop - 1)
+                    // this.setTheCoordsOfElement(zeroPath,startX,startY)
+                    // //
+                    // wrap.appendChild(zeroPath)
+                    // wrap.appendChild(zeroCircle)
 
+                }
+            })
+    }
 
-                        let percent = parseInt((curr * 100) / max);
-                        posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
+    // Resizes the graph on move of the selector
+    ResizeGraph(){
+        // Clear bigSVG
+        this.clearBig()
 
-                        if(prev === max) prevPos = 2
+        const context = this
 
-                        // This consts whill be added in to the coords of the elements
-                        const startX = xPos - intervalBetweenPoints
-                        const startY = prevPos
-                        const endX = xPos
-                        const endY = posOnTheScreen
+        // Elements
+        const smallSVG = document.querySelector('.smallSVG')
+        const wraps = document.querySelectorAll('.smallSVG svg')
+        const smallSVGWidth = smallSVG.getBoundingClientRect().width
+        const leftCorner = document.querySelector('.leftCorner')
+        const rightCorner= document.querySelector('.rightCorner')
 
-                        this.setTheCoordsOfElement(path,startX, startY, endX, endY)
-                        // this.colorElement(path, this.obj.columns[index][0])
+        // Attributes of corners
+        const leftWidth = leftCorner.getBoundingClientRect().width
+        const rightWidth = rightCorner.getBoundingClientRect().width
+        const leftX = +leftCorner.getAttribute('x')
+        const rightX = +rightCorner.getAttribute('x')
 
-                        this.setTheCoordsOfElement(circle,startX,startY)
-                        // this.colorElement(circle, this.obj.columns[index][0])
+        // Array which will we added in to addToPath()
+        const charts = [[]]
 
-                        wrap.appendChild(path)
-                        wrap.appendChild(circle)
-                    }
+        // Checks element and push it to charts
+        function checkForRightElement(element,index){
+            const dataIndex = +element.getAttribute('data-index')
+            const elementRect = element.getBoundingClientRect().x
 
-                    xPos += intervalBetweenPoints
+            if(elementRect >= (leftX) && elementRect <= (rightX)){
+                // Here push value of charts
+                charts[index].push(context.obj.columns[index][dataIndex])
+            }
+        }
+
+        // Go through each foreignObject
+        for(let i = 0; i < wraps.length;i++){
+
+            if(!wraps[i].classList.contains('svgg')){
+                const list = wraps[i].children
+                charts.push([])
+
+                for(let j = 0; j < list.length; j++){
+                    if(list[j].tagName === 'path') checkForRightElement(list[j], i + 1)
                 }
             }
-        })
+        }
+        this.addToPath('bigSVG', charts)
     }
 
     // Set the .bigSVG width bigger than screen width
@@ -173,8 +262,14 @@ class Graph {
         smallSVG.appendChild(svgg)
     }
 
+    // Clear Only Big SVG
+    clearBig(){
+        const bigSVG = document.querySelector('.bigSVG')
+        bigSVG.innerHTML = ''
+    }
+
     // Read names of charts in the graph
-    ReadNames(){
+    ReadNames(idName){
         const param = this.obj.names
         for (let key in param){
             console.log(key + ' - '+ param[key])

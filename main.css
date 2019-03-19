@@ -14,6 +14,10 @@ path{
     height: 400px;
 }
 
+.big{
+    overflow: hidden;
+}
+
 li{
     list-style: none;
 }
@@ -26,8 +30,6 @@ li{
 .wholeSelector{
     position: relative;
 }
-
-
 
 
 svg{
@@ -52,4 +54,7 @@ svg{
     z-index: 10;
     position: relative;
     cursor: move;
+}
+
+.bigSVG-wrap{
 }
