@@ -89,6 +89,7 @@
                     const wrap = document.querySelector(`#${selector}-${index}`)
 
                     // CHANGE THE WIDTH HERE
+                    // IN 3 PARAM
                     if(selector === 'smallSVG'){
                         wrap.parentElement.setAttributeNS(null, 'width', '750')
                     }
