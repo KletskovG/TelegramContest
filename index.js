@@ -28,25 +28,28 @@ window.onload = async () => {
                 firstGraph.clearPaths(i)
 
                 firstGraph.addToPath('smallSVG')
-                firstGraph.addToPath('bigSVG')
-                firstGraph.ReadNames()
                 firstGraph.ResizeGraph()
+                firstGraph.ReadNames()
+
             }
         }
 
-        // for (let i = 0; i < radioInputNew.length; i++) {
-        //     console.log(radioInputs)
-        //     if (radioInputs[i].checked === true) {
-        //         firstGraph.clearPaths(i)
-        //
-        //         // Build Charts
-        //         firstGraph.addToPath('smallSVG')
-        //         firstGraph.addToPath('bigSVG')
-        //         firstGraph.ResizeGraph()
-        //     }
-        //
-        //     // Select the graphs here
-        // }
+        for (let i = 0; i < radioInputNew.length; i++) {
+            console.log(radioInputs)
+            if (radioInputs[i].checked === true) {
+                // firstGraph.clearPaths(i)
+                //
+                // // Build Charts
+                // firstGraph.addToPath('smallSVG')
+                // firstGraph.addToPath('bigSVG')
+                // TODO: stop here trying to add inputs
+                firstGraph.ResizeGraph()
+
+                firstGraph.ReadNames()
+            }
+
+            // Select the graphs here
+        }
 
     }
 
