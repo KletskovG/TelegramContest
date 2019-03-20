@@ -1,4 +1,10 @@
+/*TODO
+    group-up display-flex props
+    Think about good style for radios
+*/
+
 body{
+
     font-family: sans-serif;
     /*width: 100vw;*/
     height: 100vh;
@@ -56,5 +62,47 @@ svg{
     cursor: move;
 }
 
-.bigSVG-wrap{
+/* Select Graphs */
+.selectGraphs{
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    margin-top: 15px;
+}
+
+.graphInput{
+    display: none;
+}
+
+.selectGraphs-checker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.checkerRadio-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid red;
+    background: transparent;
+    margin-right: 5px;
+    transition: .5s;
+}
+
+.checkerRadio-in{
+    width: 65%;
+    height: 65%;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.switchedOn{
+    transition: .5s;
+    background: red !important;
 }

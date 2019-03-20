@@ -93,10 +93,10 @@ class Selector {
             elem.addEventListener('mouseup', endDrag)
             elem.addEventListener('mouseleave', endDrag)
 
-            // elem.addEventListener("touchstart", startDrag)
-            // elem.addEventListener("touchend", endDrag)
-            // elem.addEventListener("touchcancel", endDrag)
-            // elem.addEventListener("touchmove", drag)
+            elem.addEventListener("touchstart", startDrag)
+            elem.addEventListener("touchend", endDrag)
+            elem.addEventListener("touchcancel", endDrag)
+            elem.addEventListener("touchmove", drag)
         }
 
         // Moves the middle part of a selector
@@ -172,10 +172,10 @@ class Selector {
             selectorMain.addEventListener('mouseup', endDragMain)
             selectorMain.addEventListener('mouseleave', endDragMain)
 
-            // selectorMain.addEventListener("touchstart", startDragMain)
-            // selectorMain.addEventListener("touchend", endDragMain)
-            // selectorMain.addEventListener("touchcancel", endDragMain)
-            // selectorMain.addEventListener("touchmove", dragMain)
+            selectorMain.addEventListener("touchstart", startDragMain)
+            selectorMain.addEventListener("touchend", endDragMain)
+            selectorMain.addEventListener("touchcancel", endDragMain)
+            selectorMain.addEventListener("touchmove", dragMain)
         }
 
         moveMainSelector()

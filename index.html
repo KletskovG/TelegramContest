@@ -1,3 +1,5 @@
+<!--TODO create cusom checkboxes-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,23 +60,68 @@
 
     <form action="" class="selectGraphs">
         <label >
-            <input type="radio" name="graph" value="0" checked> First Graph <br>
+            <input type="radio" name="graph" value="0" checked class="graphInput">
+            <!--<br> -->
+            <div class="selectGraphs-checker">
+                <span class="checkerRadio-main">
+                    <span class="checkerRadio-in switchedOn">
+                    </span>
+                </span>
+
+                <span>First Graph</span>
+            </div>
         </label>
 
-        <label>
-            <input type="radio" name="graph" value="1" > Second Graph<br>
+        <label >
+            <input type="radio" name="graph" value="1" checked class="graphInput">
+            <!--<br> -->
+            <div class="selectGraphs-checker">
+                <span class="checkerRadio-main">
+                    <span class="checkerRadio-in">
+                    </span>
+                </span>
+
+                <span>Second Graph</span>
+            </div>
         </label>
 
-        <label>
-            <input type="radio" name="graph" value="2"> Third Graph<br>
+        <label >
+            <input type="radio" name="graph" value="2" checked class="graphInput">
+            <!--<br> -->
+            <div class="selectGraphs-checker">
+                <span class="checkerRadio-main">
+                    <span class="checkerRadio-in">
+                    </span>
+                </span>
+
+                <span>Third Graph</span>
+            </div>
         </label>
 
-        <label>
-            <input type="radio" name="graph" value="3"> Fourth Graph<br>
+        <label >
+            <input type="radio" name="graph" value="3" checked class="graphInput">
+            <!--<br> -->
+            <div class="selectGraphs-checker">
+                <span class="checkerRadio-main">
+                    <span class="checkerRadio-in">
+                    </span>
+                </span>
+
+                <span>Fourth Graph</span>
+            </div>
         </label>
 
-        <label>
-            <input type="radio" name="graph" value="4"> Fifth Graph
+        <label >
+            <input type="radio" name="graph" value="4" checked class="graphInput">
+            <!--<br> -->
+            <div class="selectGraphs-checker">
+                <span class="checkerRadio-main">
+                    <span class="checkerRadio-in">
+                    </span>
+                </span>
+
+                <span>Fifth Graph</span>
+            </div>
         </label>
 
     </form>
@@ -88,9 +135,12 @@
         </label>
     </form>
 
+
+
 </div>
 <script src="graph.js" defer></script>
 <script src="selector.js" defer></script>
+<script src="togglers.js" defer></script>
 <script src="index.js" defer></script>
 
 </body>

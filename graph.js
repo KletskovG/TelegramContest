@@ -65,7 +65,9 @@
 
     }
 
+    setSmallCharts(){
 
+    }
 
     // Build Charts
     addToPath(selector, charts = this.obj.columns){
@@ -86,30 +88,15 @@
                     this.createWrapForChart(selector,index,SVG)
                     const wrap = document.querySelector(`#${selector}-${index}`)
 
+                    // CHANGE THE WIDTH HERE
+                    if(selector === 'smallSVG'){
+                        wrap.parentElement.setAttributeNS(null, 'width', '750')
+                    }
+
                     let xPos = intervalBetweenPoints * 2
 
                     let startOfTheLoop
                     typeof charts[1][0] === 'string' ? startOfTheLoop = 2 : startOfTheLoop = 1
-
-                    // // Set the 0 element of the chart
-                    // // TODO: fix the bug with the startY
-                    // const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-                    // const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-                    //
-                    // const startX = 0
-                    // const startY = parseInt(array[startOfTheLoop - 1] * 100 / max)
-                    //
-                    // const endX = intervalBetweenPoints
-                    //
-                    // let percent = parseInt((array[startOfTheLoop - 1] * 100) / max);
-                    // let posOnTheScreen = parseInt((rectSVG.height * percent) / 100);
-                    //
-                    // const endY = posOnTheScreen
-                    //
-                    // this.setTheCoordsOfElement(path,startX, startY, startX, startY, startOfTheLoop - 1)
-                    // this.setTheCoordsOfElement(circle,startX,startY)
-                    // wrap.appendChild(path)
-                    // wrap.appendChild(circle)
 
                     for(let i = startOfTheLoop; i < array.length;i++){
                         const curr = array[i]
@@ -166,25 +153,6 @@
 
                         xPos += intervalBetweenPoints
                     }
-
-                    // const zeroPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-                    // const zeroCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-                    //
-                    // const endCircle = wrap.querySelector('circle')
-                    //
-                    // const startX = 0
-                    // const startY = array[startOfTheLoop - 1] * 100 / max
-                    // const endX = intervalBetweenPoints
-                    //
-                    // const endY = array[startOfTheLoop] * 100 / max
-                    // console.log(`startX - ${startX}, startY - ${startY}, endX - ${endX}, endY - ${endY}`)
-                    //
-                    // this.setTheCoordsOfElement(zeroPath,startX, startY, endX, endY, startOfTheLoop - 1)
-                    // this.setTheCoordsOfElement(zeroPath,startX,startY)
-                    // //
-                    // wrap.appendChild(zeroPath)
-                    // wrap.appendChild(zeroCircle)
-
                 }
             })
     }
@@ -269,11 +237,102 @@
     }
 
     // Read names of charts in the graph
-    ReadNames(idName){
-        const param = this.obj.names
-        for (let key in param){
-            console.log(key + ' - '+ param[key])
-        }
-    }
+    //  ReadNames(name) {
+    //      console.log("run - readnames")
+    //      const param = this.obj.names
+    //      const names = document.querySelectorAll('.selectGraphs').length
+    //
+    //      for(name in param){
+    //
+    //      }
+    //
+    //
+    //
+    //      // TODO: check it fot usability!!!!
+    //      // if (document.getElementById( 'selectLine') == null) {
+    //      //     this.createForms()
+    //      // }
+    //      // else {
+    //      //     document.getElementById('selectLine').parentNode.removeChild(document.getElementById('selectLine'))
+    //      //     this.createForms()
+    //      // }
+    //      for (let i = 0; i < names; i++) {
+    //          if (name == "0" && document.getElementById('firstLine') == null) {
+    //
+    //              this.CreateInput(name, param)
+    //
+    //          }
+    //
+    //          else if (name == "1" && document.getElementById('firstLine') == null) {
+    //
+    //              this.CreateInput(name, param)
+    //          }
+    //          else if (name == "4" && document.getElementById('firstLine') == null) {
+    //              this.CreateInput(name, param)
+    //          }
+    //          else {
+    //              document.getElementById('firstLine').parentNode.removeChild(document.getElementById('firstLine'))
+    //          }
+    //      }
+    //
+    //  }
+    //
+    //  CreateInput(line, param) {
+    //      console.log("run - createinput")
+    //      let label1 = document.createElement("label")
+    //      let label2 = document.createElement("label")
+    //      let label3 = document.createElement("label")
+    //      let label4 = document.createElement("label")
+    //
+    //      label1.setAttribute('id', 'firstLine')
+    //      label2.setAttribute('id', 'secondLine')
+    //      label3.setAttribute('id', 'thirdLine')
+    //      label4.setAttribute('id', 'fourthLine')
+    //
+    //      document.getElementById('selectLine').appendChild(label1)
+    //      document.getElementById('selectLine').appendChild(label2)
+    //
+    //      if (line != "4") {
+    //          let input1 = document.createElement("input")
+    //          let input2 = document.createElement("input")
+    //
+    //          input1.setAttribute('type', 'checkbox')
+    //          input1.setAttribute('name', 'chart')
+    //          input1.setAttribute('value', param['y0'])
+    //          input2.setAttribute('type', 'checkbox')
+    //          input2.setAttribute('name', 'chart')
+    //          input2.setAttribute('value', param['y1'])
+    //
+    //          document.getElementById('firstLine').appendChild(input1)
+    //          document.getElementById('secondLine').appendChild(input2)
+    //      }
+    //      else {
+    //          let input1 = document.createElement("input")
+    //          let input2 = document.createElement("input")
+    //          let input3 = document.createElement("input")
+    //          let input4 = document.createElement("input")
+    //
+    //          document.getElementById('selectLine').appendChild(label3)
+    //          document.getElementById('selectLine').appendChild(label4)
+    //          input1.textContent = "FirstLine"
+    //
+    //          input2.textContent = "SecondLine"
+    //          input3.textContent = "ThirdLine"
+    //          input4.textContent = "FourthLine"
+    //
+    //          input1.setAttribute('type', 'checkbox')
+    //          input2.setAttribute('type', 'checkbox')
+    //          input3.setAttribute('type', 'checkbox')
+    //          input4.setAttribute('type', 'checkbox')
+    //
+    //          document.getElementById('firstLine').appendChild(input1)
+    //          document.getElementById('secondLine').appendChild(input2)
+    //          document.getElementById('thirdLine').appendChild(input3)
+    //          document.getElementById('fourthLine').appendChild(input4)
+    //
+    //      }
+    //  }
 
-}
+
+
+ }

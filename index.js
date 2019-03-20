@@ -16,6 +16,8 @@ window.onload = async () => {
     const firstGraph = new Graph(DATA)
     const selector = new Selector()
 
+    setUpCheckers()
+
     // Delete current charts and build new
     function rebuildGraph() {
         const radioInputs = document.querySelectorAll('.selectGraphs input')
@@ -28,21 +30,23 @@ window.onload = async () => {
                 firstGraph.addToPath('smallSVG')
                 firstGraph.addToPath('bigSVG')
                 firstGraph.ReadNames()
-            }
-        }
-
-        for (let i = 0; i < radioInputNew.length; i++) {
-            console.log(radioInputs)
-            if (radioInputs[i].checked === true) {
-                firstGraph.clearPaths(i)
-
-                // Build Charts
-                firstGraph.addToPath('smallSVG')
                 firstGraph.ResizeGraph()
             }
-
-            // Select the graphs here
         }
+
+        // for (let i = 0; i < radioInputNew.length; i++) {
+        //     console.log(radioInputs)
+        //     if (radioInputs[i].checked === true) {
+        //         firstGraph.clearPaths(i)
+        //
+        //         // Build Charts
+        //         firstGraph.addToPath('smallSVG')
+        //         firstGraph.addToPath('bigSVG')
+        //         firstGraph.ResizeGraph()
+        //     }
+        //
+        //     // Select the graphs here
+        // }
 
     }
 
