@@ -1,20 +1,30 @@
-function setUpCheckers(){
-    const checkers = document.querySelectorAll('.selectGraphs-checker')
-    const inputs = document.querySelectorAll('.graphInput')
-    console.log(checkers)
+class Togglers{
+    constructor(DATA){
+        this.DATA = DATA
+        console.log(this.DATA)
+    }
 
-    for(let i = 0; i < checkers.length; i++){
+    createFormForGraphs(){
+        const form = document.querySelector('.selectGraphs')
 
-        // toggle Radio buttons
-        checkers[i].addEventListener('click', (evt)=>{
-            for(let j = 0 ;j < inputs.length; j++)
-                inputs[i].checked = false
+        let count = 0
+        for(let i = 0; i < this.DATA.length; i++){
+            count++
+            const p = document.createElement('p')
+            if(count === 1){
 
-            const toggle = checkers[i].querySelector('.checkerRadio-in')
+                p.innerHTML = `
+                <input type="radio" id="graph${count}" name="radio-group" checked>
+                <label for="graph${count}">Graph № ${count}</label>`
 
-            toggle.classList.toggle('switchedOn')
-            toggle.parentElement.children[0].checked = true
+            }
+            else{
 
-        })
+                p.innerHTML = `
+                <input type="radio" id="graph${count}" name="radio-group">
+                <label for="graph${count}">Graph № ${count} </label>`
+            }
+            form.appendChild(p)
+        }
     }
 }

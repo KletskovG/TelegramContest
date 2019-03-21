@@ -3,6 +3,8 @@
 
 let  DATA // DATA form JSON file
 
+
+
 window.onload = async () => {
     // const inputs = document.querySelectorAll('.selectLine input')
     // console.log(inputs)
@@ -13,10 +15,12 @@ window.onload = async () => {
          .then(res => DATA = res)
          .catch(err => console.log(err))
 
+
+    // Create main objects
     const firstGraph = new Graph(DATA)
     const selector = new Selector()
+    const togglers = new Togglers(DATA)
 
-    setUpCheckers()
 
     // Delete current charts and build new
     function rebuildGraph() {
@@ -58,12 +62,21 @@ window.onload = async () => {
         firstGraph.ResizeGraph()
     })
 
+    window.addEventListener('createGraphs', ()=>{
 
+    })
+
+    // Create Form
+    togglers.createFormForGraphs()
+
+
+    // Handle The selector
     selector.dragSelector()
 
     // Build Charts
     firstGraph.addToPath('smallSVG')
     firstGraph.ResizeGraph()
+
 
     // Select the graphs here
     const radioInputs = document.querySelectorAll('.selectGraphs input')

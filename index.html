@@ -38,9 +38,11 @@
                 <rect x="40" y="0" width="130" height="120" style="fill:green"
                       class="selectMain"></rect>
 
-
-
-                <rect x="170" y="0" width="20" height="120" class="selectCorner rightCorner"></rect>
+                <!-- ---------- -->
+                <!--Set the opacity of the corner HERE-->
+                <!---------------------->
+                <rect x="170" y="0" width="20" height="120"
+                      class="selectCorner rightCorner" style="fill:transparent"></rect>
 
 
 
@@ -59,80 +61,18 @@
         </foreignObject>
     </svg>
 
+    <!--Select The Graphs here-->
     <form action="" class="selectGraphs">
-        <label >
-            <input type="radio" name="graph" value="0" checked class="graphInput">
-            <!--<br> -->
-            <div class="selectGraphs-checker">
-                <span class="checkerRadio-main">
-                    <span class="checkerRadio-in switchedOn">
-                    </span>
-                </span>
-
-                <span>First Graph</span>
-            </div>
-        </label>
-
-        <label >
-            <input type="radio" name="graph" value="1" checked class="graphInput">
-            <!--<br> -->
-            <div class="selectGraphs-checker">
-                <span class="checkerRadio-main">
-                    <span class="checkerRadio-in">
-                    </span>
-                </span>
-
-                <span>Second Graph</span>
-            </div>
-        </label>
-
-        <label >
-            <input type="radio" name="graph" value="2" checked class="graphInput">
-            <!--<br> -->
-            <div class="selectGraphs-checker">
-                <span class="checkerRadio-main">
-                    <span class="checkerRadio-in">
-                    </span>
-                </span>
-
-                <span>Third Graph</span>
-            </div>
-        </label>
-
-        <label >
-            <input type="radio" name="graph" value="3" checked class="graphInput">
-            <!--<br> -->
-            <div class="selectGraphs-checker">
-                <span class="checkerRadio-main">
-                    <span class="checkerRadio-in">
-                    </span>
-                </span>
-
-                <span>Fourth Graph</span>
-            </div>
-        </label>
-
-        <label >
-            <input type="radio" name="graph" value="4" checked class="graphInput">
-            <!--<br> -->
-            <div class="selectGraphs-checker">
-                <span class="checkerRadio-main">
-                    <span class="checkerRadio-in">
-                    </span>
-                </span>
-
-                <span>Fifth Graph</span>
-            </div>
-        </label>
 
     </form>
 
+    <!--Select the charts -->
     <form action="" class="selectLine">
         <label>
-            <input type="radio" name="chart" value="0"> First Line<br>
+            <input type="radio" name="chart" value="0">  Line<br>
         </label>
         <label>
-            <input type="radio" name="chart" value="1"> Second Line
+            <input type="radio" name="chart" value="1"> Fifth Line
         </label>
     </form>
 
