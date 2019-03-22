@@ -144,6 +144,7 @@ class Selector {
                 //selectorMain.setAttributeNS(null, 'width', `${+x1 - +x2}`)
 
 
+
                 if(isPressed){
 
                     // Change position of the main selector

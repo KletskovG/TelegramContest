@@ -1,13 +1,52 @@
+/*TODO
+    group-up display-flex props
+    Think about good style for radios
+    Make style sections
+    Calculate percents of all elementsa
+*/
+
 body{
+
     font-family: sans-serif;
-    width: 100vw;
-    /*margin: 0;*/
+    /*width: 100vw;*/
+    height: 100vh;
+    overflow: hidden;
+    margin-right: 8px;
 }
 
 path{
     stroke-width: 4;
 }
 
+.bigSVG {
+    height: 400px;
+}
+
+.big{
+    overflow: hidden;
+}
+
+li{
+    list-style: none;
+}
+
+.selector{
+    position: absolute;
+    opacity: 0.7;
+}
+
+.selectCorner{
+    fill: #DCEAF3;
+}
+
+.selectMain{
+    fill:transparent;
+    opacity: 1;
+}
+
+.wholeSelector{
+    position: relative;
+}
 
 svg{
     width: 100%;
@@ -17,8 +56,120 @@ svg{
     background: #F5F9FB;
 }
 
+.smallPaths{
+    width: 1440px;
+    height: 120px;
+}
+
+.smallSVG path,
+.smallSVG circle{
+    z-index: -10;
+}
+
+.smallSVG .wrap{
+    vertical-align: top;
+    margin-left: 40px;
+}
+
 .selectCorner{
     z-index: 10;
     position: relative;
     cursor: move;
+}
+
+/* Select Graphs */
+.selectGraphs{
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    margin-top: 15px;
+}
+
+.graphInput{
+    display: none;
+}
+
+.selectGraphs-checker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.checkerRadio-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid red;
+    background: transparent;
+    margin-right: 5px;
+    transition: .5s;
+}
+
+.checkerRadio-in{
+    width: 65%;
+    height: 65%;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.switchedOn{
+    transition: .5s;
+    background: red !important;
+}
+
+/* Custom radio buttons For select the Graph*/
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F87DA9;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
