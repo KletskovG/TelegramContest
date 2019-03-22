@@ -131,30 +131,32 @@ class Selector {
 
             function dragMain(evt){
                 const selectorWidth = selectorMain.getBoundingClientRect().width
-
+                const borderWidth = Math.round(+document.querySelector('.leftCorner').width.baseVal.value)
 
                 const selectorMainX = selectorMain.getAttribute('x')
 
-                const nextRightPosition = +selectorMainX + selectorWidth
-                const nextLeftPosition = +selectorMainX
+                const nextRightPosition = +selectorMainX + selectorWidth + borderWidth*0.1
+                const nextLeftPosition = +selectorMainX - borderWidth
 
                 const x1 = selectorCorners[0].getAttribute('x')
                 const x2 = selectorCorners[1].getAttribute('x')
 
-                selectorMain.setAttributeNS(null, 'width', `${+x1 - +x2}`)
+                //selectorMain.setAttributeNS(null, 'width', `${+x1 - +x2}`)
+
 
 
                 if(isPressed){
 
                     // Change position of the main selector
-                    if(+evt.clientX - +mousePos + nextRightPosition - nextLeftPosition+37 < document.documentElement.clientWidth && +evt.clientX - +mousePos > 0 ){
+                    if(+evt.clientX - +mousePos + nextRightPosition - nextLeftPosition+borderWidth*2 < document.documentElement.clientWidth && +evt.clientX - +mousePos > 0 ){
 
-                        selectorMain.setAttributeNS(null, 'x', `${+evt.clientX - +mousePos}`)
+                        if(evt.clientX<+document.querySelector('.rightCorner').x.baseVal.value && evt.clientX>+document.querySelector('.leftCorner').x.baseVal.value)
+                            selectorMain.setAttributeNS(null, 'x', `${+evt.clientX - +mousePos + borderWidth}`)
                     }
 
                     // Change position of the corners
                     leftCorner.setAttributeNS(null, 'x', nextLeftPosition)
-                    rightCorner.setAttributeNS(null, 'x', `${nextRightPosition}`)
+                    rightCorner.setAttributeNS(null, 'x', nextRightPosition)
 
                     const event = new Event('rebuild')
 
