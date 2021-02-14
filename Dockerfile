@@ -1,8 +1,8 @@
 FROM node:12-alpine
 
-WORDIR /app
+WORKDIR /app
 
 COPY ./ /app
 
-RUN npm install 
+# RUN npm install 
 CMD ["node", "server.js"]
