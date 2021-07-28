@@ -2,8 +2,16 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 const path = require('path')
+const { Telegraf } = require('telegraf')
 
 const PORT = process.env.PORT || 3000
+
+const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.start((ctx) => ctx.reply('Welcome'))
+bot.help((ctx) => ctx.reply('Send me a sticker'))
+bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.launch()
 
 const mimeType = {
     '.ico': 'image/x-icon',
@@ -12,14 +20,6 @@ const mimeType = {
     '.json': 'application/json',
     '.css': 'text/css',
     '.png': 'image/png',
-    // '.jpg': 'image/jpeg',
-    // '.wav': 'audio/wav',
-    // '.mp3': 'audio/mpeg',
-    // '.svg': 'image/svg+xml',
-    // '.pdf': 'application/pdf',
-    // '.doc': 'application/msword',
-    // '.eot': 'appliaction/vnd.ms-fontobject',
-    // '.ttf': 'aplication/font-sfnt'
 }
 
 
@@ -71,6 +71,13 @@ http.createServer(function (req, res) {
             res.write('Hrllo world')
             res.end()
 
+        }
+
+        if (req.url === '/send') {
+            res.writeHead(200, {'Content-Type': 'text/plain'})
+            res.write(process.env.BOT_TOKEN)
+
+            res.end()
         }
 
 
