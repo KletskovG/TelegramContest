@@ -7,7 +7,9 @@ const { Telegraf } = require('telegraf')
 const PORT = process.env.PORT || 3000
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply('Welcome'))
+bot.start((ctx) => {
+    ctx.reply(ctx.chat.id)
+})
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
@@ -69,7 +71,7 @@ http.createServer(function (req, res) {
 
             res.writeHead(200, {'Content-Type': 'text/plain'})
             // res.write(process.env.BOT_TOKEN)
-            bot.telegram.sendMessage("Command is done")
+            bot.telegram.sendMessage(503054040, "Command is done")
             res.end()
 
         }
