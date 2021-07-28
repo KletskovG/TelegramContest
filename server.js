@@ -68,8 +68,8 @@ http.createServer(function (req, res) {
             // res.end(JSON.stringify(data))
 
             res.writeHead(200, {'Content-Type': 'text/plain'})
-            res.write(process.env.BOT_TOKEN)
-
+            // res.write(process.env.BOT_TOKEN)
+            bot.telegram.sendMessage("Command is done")
             res.end()
 
         }
