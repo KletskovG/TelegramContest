@@ -68,7 +68,8 @@ http.createServer(function (req, res) {
             // res.end(JSON.stringify(data))
 
             res.writeHead(200, {'Content-Type': 'text/plain'})
-            res.write('Hrllo world')
+            res.write(process.env.BOT_TOKEN)
+
             res.end()
 
         }
