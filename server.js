@@ -65,21 +65,20 @@ http.createServer(function (req, res) {
         }) 
 
         if(req.url === '/getData'){
-            // res.writeHead(200,{'Content-Type': 'application/json'})
-            // const data = fs.readFileSync(path.join(__dirname,'chart_data.json'),'utf-8')
-            // res.end(JSON.stringify(data))
-
             res.writeHead(200, {'Content-Type': 'text/plain'})
-            // res.write(process.env.BOT_TOKEN)
             bot.telegram.sendMessage(503054040, "Command is done")
             res.end()
-
         }
 
-        if (req.url === '/send') {
+        if (req.url === '/done') {
             res.writeHead(200, {'Content-Type': 'text/plain'})
-            res.write(process.env.BOT_TOKEN)
+            bot.telegram.sendMessage(503054040, "Command is done")
+            res.end()
+        }
 
+        if (req.url === '/fail') {
+            res.writeHead(200, {'Content-Type': 'text/plain'})
+            bot.telegram.sendMessage(503054040, "Command is done || Error")
             res.end()
         }
 

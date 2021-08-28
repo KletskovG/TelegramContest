@@ -1,6 +1,3 @@
-//import { runInThisContext } from "vm";
-// TODO: Handle touches
-
 let  DATA // DATA form JSON file
 
 
