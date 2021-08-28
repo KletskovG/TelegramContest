@@ -1,0 +1,23 @@
+name: Telegram Bot CI
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [12]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build service
+        run : |
+          npm i
+      - name: Publish service image to registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: ${{ secrets.SERVICE_IMAGE }}
+          username: ${{ secrets.DOCKER_LOGIN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
