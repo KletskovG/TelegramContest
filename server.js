@@ -4,7 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const { Telegraf } = require('telegraf')
 const checkBtc = require("./checkBtc");
-const shell
 const PORT = process.env.PORT || 3000
 
 const bot = new Telegraf(process.env.BOT_TOKEN) 
