@@ -26,6 +26,11 @@ const mimeType = {
 
 setInterval(() => {
     let result = checkBtc();
+
+    if (result > 50000) {
+        bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
+    }
+
     if (result > 60000) {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
     }
