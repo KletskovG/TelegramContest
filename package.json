@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "ncp": "^2.0.0",
+    "node-fetch": "^2.6.1",
     "telegraf": "^3.38.0"
   }
 }

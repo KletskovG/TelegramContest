@@ -3,7 +3,7 @@ const url = require('url')
 const fs = require('fs')
 const path = require('path')
 const { Telegraf } = require('telegraf')
-
+const checkBtc = require("./checkBtc");
 const PORT = process.env.PORT || 3000
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -24,6 +24,12 @@ const mimeType = {
     '.png': 'image/png',
 }
 
+setInterval(() => {
+    let result = checkBtc();
+    if (result > 60000) {
+        bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
+    }
+}, 1000 * 60)
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)
