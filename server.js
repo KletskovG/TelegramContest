@@ -6,7 +6,8 @@ const { Telegraf } = require('telegraf')
 const checkBtc = require("./checkBtc");
 const PORT = process.env.PORT || 3000
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+// const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf("812473792:AAERrQquMbMj1z-tSyxOgKWe86yllabf6HE")
 bot.start((ctx) => {
     ctx.reply(ctx.chat.id)
 })
@@ -24,17 +25,22 @@ const mimeType = {
     '.png': 'image/png',
 }
 
+
 setInterval(() => {
     let result = checkBtc();
-
+    const tz = {
+        value: '+3.50',
+        str: '(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg'
+    }
+    const currentTime = ((new Date().getUTCHours() + parseFloat(tz.value))).toFixed(2)
     if (result > 50000) {
         bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
-    }
-
-    if (result > 60000) {
+    } else if (result > 60000) {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
+    } else if (result < 50000 && currentTime > 23.00 && currentTime < 23.59) {
+        bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
-}, 1000 * 60)
+}, 1000 * 30)
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)
