@@ -12,6 +12,7 @@
   "dependencies": {
     "ncp": "^2.0.0",
     "node-fetch": "^2.6.1",
+    "shelljs": "^0.8.4",
     "telegraf": "^3.38.0"
   }
 }

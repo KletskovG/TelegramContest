@@ -21,3 +21,6 @@ jobs:
           name: ${{ secrets.SERVICE_IMAGE }}
           username: ${{ secrets.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Done
+        run: |
+          curl ${{ secrets.DONE }}
