@@ -43,10 +43,10 @@ setInterval(async () => {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
     } 
     
-    if (timeResult > 10.00) {
+    if (timeResult > 23.00) {
         bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
-}, 60000)
+}, 60000 * 30) // 1 minute * 30
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)

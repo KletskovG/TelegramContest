@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 
+// TODO: make this func async and add await to return fetch
 const checkBtc = () => {
     return fetch("https://api.coingecko.com/api/v3/coins/bitcoin")
     .then(res => res.json())
