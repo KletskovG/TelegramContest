@@ -36,7 +36,7 @@ setInterval(() => {
         bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
     } else if (result > 60000) {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
-    } else if (result < 50000 && currentTime > 23.00 && currentTime < 23.59) {
+    } else if (result < 50000 && currentTime > 9.00 && currentTime < 9.59) {
         bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
 }, 1000 * 30)
