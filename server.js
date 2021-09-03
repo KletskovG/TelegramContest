@@ -6,8 +6,7 @@ const { Telegraf } = require('telegraf')
 const checkBtc = require("./checkBtc");
 const PORT = process.env.PORT || 3000
 
-// const bot = new Telegraf(process.env.BOT_TOKEN) 
-const bot = new Telegraf("812473792:AAExJlbfYTNmCmcKyMILkigerd7V2IvHaps") 
+const bot = new Telegraf(process.env.BOT_TOKEN) 
 bot.start((ctx) => {
     ctx.reply(ctx.chat.id)
 })
