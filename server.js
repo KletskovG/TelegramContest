@@ -6,7 +6,8 @@ const { Telegraf } = require('telegraf')
 const checkBtc = require("./checkBtc");
 const PORT = process.env.PORT || 3000
 
-const bot = new Telegraf(process.env.BOT_TOKEN) 
+// const bot = new Telegraf(process.env.BOT_TOKEN) 
+const bot = new Telegraf("812473792:AAExJlbfYTNmCmcKyMILkigerd7V2IvHaps") 
 bot.start((ctx) => {
     ctx.reply(ctx.chat.id)
 })
@@ -25,25 +26,27 @@ const mimeType = {
 }
 
 
-setInterval(() => {
-    let result = checkBtc();
+setInterval(async () => {
+    let result = await checkBtc();
     const tz = {
-        value: '+3.50',
+        value: '+3.00',
         str: '(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg'
     }
-    const currentTime = ((new Date().getUTCHours() + parseFloat(tz.value))).toFixed(2)
+    const currentTime = ((new Date().getUTCHours() + parseFloat(tz.value)))
+    const currentMinute = new Date().getUTCMinutes() + parseFloat(tz.value);
+    const timeResult = parseFloat(`${currentTime}.${currentMinute}`).toFixed(2);
     console.log("UPDATE TIME");
-    console.log(currentTime);
+    console.log(timeResult);
     if (result > 50000) {
         bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
     } else if (result > 60000) {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
     } 
     
-    if (currentTime > 10.00) {
+    if (timeResult > 10.00) {
         bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
-}, 300000)
+}, 60000)
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)
