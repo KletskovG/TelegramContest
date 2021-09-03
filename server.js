@@ -105,6 +105,12 @@ http.createServer(function (req, res) {
             res.end()
         }
 
+        if (req.url === '/ping') {
+            res.writeHead(200, {'Content-Type': 'text/plain'})
+            bot.telegram.sendMessage(503054040, "Bot is up")
+            res.end()
+        }
+
 
 }).listen(PORT) 
 
