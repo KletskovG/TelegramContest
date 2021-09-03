@@ -87,9 +87,9 @@ http.createServer(function (req, res) {
             }) 
         }) 
 
-        if(req.url === '/getData'){
+        if(req.url === '/cd'){
             res.writeHead(200, {'Content-Type': 'text/plain'})
-            bot.telegram.sendMessage(503054040, "Command is done")
+            bot.telegram.sendMessage(503054040, "Deploy command is done")
             res.end()
         }
 
