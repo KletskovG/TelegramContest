@@ -32,6 +32,8 @@ setInterval(() => {
         str: '(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg'
     }
     const currentTime = ((new Date().getUTCHours() + parseFloat(tz.value))).toFixed(2)
+    console.log("UPDATE TIME");
+    console.log(currentTime);
     if (result > 50000) {
         bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
     } else if (result > 60000) {
@@ -41,7 +43,7 @@ setInterval(() => {
     if (currentTime > 10.00) {
         bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
-}, 1800000)
+}, 300000)
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)
