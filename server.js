@@ -39,7 +39,7 @@ setInterval(() => {
     } else if (result < 50000 && currentTime > 9.00 && currentTime < 9.59) {
         bot.telegram.sendMessage(503054040, `Day is Ending. Bot is fine. Current BTC - ${result}`);
     }
-}, 1000 * 30)
+}, 1800000)
 
 http.createServer(function (req, res) {
     console.log(`${req.method} ${req.url}`)
