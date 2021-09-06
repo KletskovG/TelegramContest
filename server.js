@@ -42,7 +42,7 @@ setInterval(async () => {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
     } 
     
-    if (timeResult > 23.00) {
+    if (timeResult > 23.00 && timeResult < 24.00) {
         bot.telegram.sendMessage(503054040, `Day is Ending (${timeResult}). \n Bot is fine. Current BTC - ${result}`);
     }
 }, 60000 * 30) // 1 minute * 30
