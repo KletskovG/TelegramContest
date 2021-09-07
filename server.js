@@ -36,7 +36,7 @@ setInterval(async () => {
     const timeResult = parseFloat(`${currentTime}.${currentMinute}`).toFixed(2);
     console.log("UPDATE TIME");
     console.log(timeResult);
-    if (result > 50000 && timeResult < 23.00) {
+    if (result > 50000 && timeResult < 23.00 && timeResult > 6.00) {
         bot.telegram.sendMessage(503054040, `Bitcoin is near ${result}`);
     } else if (result > 60000) {
         bot.telegram.sendMessage(503054040, `Current Bitcoin price is ${result}`);
