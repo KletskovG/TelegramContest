@@ -1,8 +1,3 @@
- // MAKE big svg width in percents
- // TODO: make func for size the smallSVG
- // TODO: Create inputs on the rebuild The graph
-// TODO: calculate the x of the smallSVG
-
  class Graph {
     constructor(obj){
         this.WholeObj = obj

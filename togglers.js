@@ -1,7 +1,6 @@
 class Togglers{
     constructor(DATA){
         this.DATA = DATA
-        console.log(this.DATA)
     }
 
     createFormForGraphs(){
