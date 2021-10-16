@@ -48,4 +48,4 @@ app.get('/ping', (_, res) => {
 
 app.listen(PORT, () => console.log(`Server listening to  ${PORT}`));
 
-checkBtc(bot);
+// checkBtc(bot);
