@@ -1,5 +1,4 @@
 const { Telegraf } = require('telegraf');
-const checkBtc = require("./server/checkBtc");
 const PORT = process.env.PORT || 3000;
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -44,6 +43,10 @@ app.get('/ping', (_, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'})
     bot.telegram.sendMessage(503054040, "Bot is up")
     res.end()
+});
+
+app.get('/acadmey', (_, res) => {
+  
 });
 
 app.listen(PORT, () => console.log(`Server listening to  ${PORT}`));
