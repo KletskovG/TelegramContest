@@ -16,7 +16,7 @@ jobs:
         run : |
           npm i
       - name: Publish service image to registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: ${{ secrets.SERVICE_IMAGE }}
           username: ${{ secrets.DOCKER_LOGIN }}
